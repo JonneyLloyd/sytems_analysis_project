@@ -5,7 +5,9 @@
 ## GitLab
 - **Submit pull requests** (rather than pushing directly)
   - Design issues/tweaks (rather than refactors later)
+    - **Ensure we stick to OOP and don't do any crazy stuff Python lets us**
   - Learning for other team members
+    - i.e. Python
 - Create issues
   - Issues board integrated (Agile)
   - Backlog for ideas without forgetting
@@ -13,21 +15,18 @@
   - Establish clear tasks
 - Wiki with MarkDown support rather than word documents
 
-Put everything on the repo.
+Put **everything** on the repo.
 Every action item should have a tracking item on the issues board
 **(easier for everybody as we can discuss the issue in the issues section)**
 
 ## Project
 - Only suggestions, discuss
-  - Consider JavaFX for GUI
-    - CLI first (but keep both in mind)
-    - XML based layouts (like android project)
+  - Consider Python and Flask as a web framework
       - MVC friendly
-      - Easier than JFrames, JButtons, etc
-    - Works with popular IDEs
-  - Gradel for dependency management if needed
-    - Easier as dependencies will be brought in automatically for all team members (I think)
+  - PIP for dependency management (comes with Python)
+    - Easier as dependencies will be brought in automatically for all team members
   - Consider stubs for key components in design and code e.g. GUI
+
 
 ## Documentation
 - Use markdown 'as we go'
