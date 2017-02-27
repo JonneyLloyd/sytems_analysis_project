@@ -49,3 +49,6 @@
           - Room layouts
           - etc
       - 'Builds' the hotel(s) from a template
+
+# Tuesday 21 Feb (Week 5)
+Assigned tasks for sections 7 and 8
