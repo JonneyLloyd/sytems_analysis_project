@@ -52,3 +52,7 @@
 
 # Tuesday 21 Feb (Week 5)
 Assigned tasks for sections 7 and 8
+
+
+# Thursday 23 Feb (Week 5)
+Discussion on candidate classes
