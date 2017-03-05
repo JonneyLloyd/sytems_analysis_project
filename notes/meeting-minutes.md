@@ -56,3 +56,39 @@ Assigned tasks for sections 7 and 8
 
 # Thursday 23 Feb (Week 5)
 Discussion on candidate classes
+
+
+# Friday 3 Mar (Week 6)
+- Finishing
+  - Classes - Patrick
+
+
+- TODO
+  - Interaction diagrams - Bob
+  - ER diagrams - Jonney
+
+
+- Assigned tasks
+  - Implementation 1:
+    - Basic project set up - Oliver
+    - Database/SQLAlchemy mapping - Jonney
+      - Roles - permissions table (look at wordpress)
+        - RoleId
+        - RoleName
+        - each permission
+      - Classes
+        - Users
+        - Room
+        - Booking
+        - RoomPrice
+
+    - Set up nose testing - Bob
+
+    - Patrick
+      - Log in/log out
+      - Reserve
+      - Cancel
+
+    - Bob
+      - Check in
+      - Check out
