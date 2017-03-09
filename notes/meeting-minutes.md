@@ -92,3 +92,29 @@ Discussion on candidate classes
     - Bob
       - Check in
       - Check out
+
+# Tuesday 7 Mar (Week 7)
+JJs comments:
+
+  - Suggested Patterns:
+    - Decorator
+    - Factory NB
+    - Observer NB
+    - Singleton
+
+
+  - Features:
+    - Composite/Staged bookings (Double and triple for Monday to Tuesday, double from Wednesday to Friday) - IN A SINGLE BOOKING
+    - Discounts of various types
+    - Customer types
+    - Choice of hotel
+    - Availability table (entity or control class?)
+
+
+  - 3 use cases next week
+
+  - Fix consistency problems between high level architecture and class diagram
+
+  - Use separate packages rather than just classes for models
+
+  - Fix interaction diagram
