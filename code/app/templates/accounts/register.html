@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+
+  {% with messages = get_flashed_messages(category_filter=["error"]) %}
+    {% if messages %}
+      <ul class=flashes>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+  {% if session['logged_in'] %}
+    <p>You're logged in already!</p>
+  {% else %}
+    <form action="/accounts/register" method="POST">
+      <input type="email" name="email" placeholder="Email">
+      <input type="password" name="password" placeholder="Password">
+      <input type="password" name="password_confirmation" placeholder="Confirm password">
+      <input type="submit" value="Register">
+    </form>
+  {% endif %}
+
+  {% if error %}
+    <p class=error><strong>Error:</strong> {{ error }}
+  {% endif %}
+
+{% endblock %}
