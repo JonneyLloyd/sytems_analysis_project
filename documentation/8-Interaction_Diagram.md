@@ -12,3 +12,7 @@
 -communiaction Diagram
 
 ![](images/8-Interaction_Diagram/com.jpg)
+
+-Sequence Diagram
+
+![](images/8-Interaction_Diagram/sequence.jpg)
