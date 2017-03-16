@@ -1,7 +1,4 @@
 from app import app, db
-from werkzeug.security import generate_password_hash, check_password_hash
-
-from app.models.role import Role, RoleEnum
 
 
 class User(db.Model):
@@ -11,31 +8,28 @@ class User(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(120), nullable=False)
+    last_name = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(128), nullable=False)
-    role_id = db.Column(db.Integer, db.ForeignKey('role.id'), nullable=False)
+    contact_number = db.Column(db.Integer)
+    
 
-    role = db.relationship('Role')
 
-    def __init__(self, email):
+    def __init__(self, first_name, last_name, email, contact_number):
         self.email = email
-        self.set_role()
 
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
+    def set_first_name(self, first_name):
+        self.first_name = first_name
 
-    def verify_password(self, password):    # Should this be in the model?
-        return check_password_hash(self.password_hash, password)
+    def set_last_name(self, last_name):
+        self.last_name = last_name
 
-    def set_role(self, role_enum=None):    # Should this be in the model?
-        default_role_name = RoleEnum.GUEST
-        role_name = role_enum if role_enum is not None else default_role_name
-        # check if valid role in enum??
+    def set_email(self, email):
+        self.email = email
 
-        role = Role.query.filter_by(name=role_name.value).first()
-        if not role:
-            role = Role(name=role_name.value)
-        self.role = role
+    def set_contact_number(self, contact_number):
+        self.contact_number = contact_number
+
 
     def __repr__(self):
-        return '<User %r>' % self.email
+        return '<User %r>' % self.first_name

@@ -4,6 +4,8 @@ from app import app, db
 
 from app.models.user import User
 from app.models.role import Role
+from app.models.room import Room
+from app.models.booking import Booking
 from app.models.permission import Permission
 
 from app.auth.login import LoginManager, login_required, UserIsNotAuthorized
