@@ -118,3 +118,30 @@ JJs comments:
   - Use separate packages rather than just classes for models
 
   - Fix interaction diagram
+
+
+
+# Tuesday 14 Mar (Week 8)
+Rest vs web services in report to show added value
+
+Oliver:
+- Vaildation
+- List of permissions/roles
+- SQLite test database
+
+- View rooms
+
+Jonney:
+- View my reservations
+- View other reservations
+- (Finish DB + ER)
+
+Paddy:
+- Make reservation
+- Cancel reservation
+- (Finish SLC)
+
+Bob:
+- Check in
+- Check out
+- (Finish Nose testing)
