@@ -33,7 +33,7 @@ class LoginManager(object):  # should login and user be separate models??
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
-        self.login(email, password)
+        LoginManager.login(email, password)
         return True
 
     @staticmethod
