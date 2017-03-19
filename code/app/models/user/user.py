@@ -1,7 +1,9 @@
 from app import app, db
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy.ext.hybrid import hybrid_property
 
 from app.models.role import Role, RoleEnum
+from app.models.user import UserDetails
 
 
 class User(db.Model):
@@ -10,48 +12,60 @@ class User(db.Model):
     '''
     __tablename__ = 'users'
 
-    id = db.Column(db.Integer, primary_key=True)
-    _password_hash = db.Column(db.String(128), nullable=False)
-    _email = db.Column(db.String(120), unique=True, nullable=False)
-    role_id = db.Column(db.Integer, db.ForeignKey('role.id'), nullable=False)
+    _id = db.Column('id', db.Integer, primary_key=True)
+    _email = db.Column('email', db.String(120), unique=True, nullable=False)
+    _password_hash = db.Column('password_hash', db.String(128), nullable=False)
+    _role_id = db.Column('role_id', db.Integer, db.ForeignKey('role.id'), nullable=False)
+    _user_details_id = db.Column('user_details_id', db.Integer, db.ForeignKey('user_details.id'))
 
-    role = db.relationship('Role')
+    _role = db.relationship('Role')
+    _details = db.relationship('UserDetails')
 
-    def __init__(self, email):         
-	self._email = email  
-	self.set_role()
-         
+    def __init__(self, email, password=None, role=None, details=None):
+        self._email = email
+        if password is not None:
+            self.password = password
+        self._role = role
+        self._details = details
 
-    @property
-    def password_hash(self):
-        return self._password_hash
+    @hybrid_property
+    def id(self):
+        return self._id
 
-
-    @property
+    @hybrid_property
     def email(self):
         return self._email
 
     @email.setter
-    def set_email(self, email):
-        self._email = email
+    def email(self, value):
+        self._email = value
 
-    @password_hash.setter
-    def set_password_hash(self, password):
-        self._password_hash = generate_password_hash(password)
+    @hybrid_property
+    def password(self):
+        raise NotImplementedError
 
+    @password.setter
+    def password(self, value):
+        self._password_hash = generate_password_hash(value)
 
-    def verify_password(self, password):    # Should this be in the model?
-        return check_password_hash(self.password_hash, password)
+    def verify_password(self, password):
+        return check_password_hash(self._password_hash, password)
 
-    def set_role(self, role_enum=None):    # Should this be in the model?
-        default_role_name = RoleEnum.GUEST
-        role_name = role_enum if role_enum is not None else default_role_name
-        # check if valid role in enum??
+    @hybrid_property
+    def role(self):
+        return self._role
 
-        role = Role.query.filter_by(name=role_name.value).first()
-        if not role:
-            role = Role(name=role_name.value)
-        self.role = role
+    @role.setter
+    def role(self, value):
+        self._role = value
+
+    @hybrid_property
+    def details(self):
+        return self._details
+
+    @details.setter
+    def details(self, value):
+        self._details = value
 
     def __repr__(self):
-        return '<User %r>' % self._id
+        return '<User %r>' % self._email

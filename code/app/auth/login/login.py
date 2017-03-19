@@ -1,7 +1,7 @@
 from flask import g, session
 from app import db
 from app.models.user import User
-from app.models.role import RoleEnum
+from app.models.role import RoleEnum, RoleFactory
 
 
 class LoginManager(object):  # should login and user be separate models??
@@ -30,7 +30,8 @@ class LoginManager(object):  # should login and user be separate models??
             return False  # exception??
 
         user = User(email)
-        user.set_password(password)
+        user.password = password
+        user.role = RoleFactory.get_role(RoleEnum.GUEST)
         db.session.add(user)
         db.session.commit()
         LoginManager.login(email, password)
@@ -43,7 +44,7 @@ class LoginManager(object):  # should login and user be separate models??
             session['logged_in'] = True
         else:
             user = User(None)  # Anonymous User instead? TODO: how to track the user session without a user_id
-            user.set_role(RoleEnum.ANONYMOUS)
+            user.role = RoleFactory.get_role(RoleEnum.ANONYMOUS)
             session['logged_in'] = False
         g.user = user
 
