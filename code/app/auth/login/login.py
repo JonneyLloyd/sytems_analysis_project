@@ -30,7 +30,7 @@ class LoginManager(object):  # should login and user be separate models??
             return False  # exception??
 
         user = User(email)
-        user.set_password_hash(password)
+        user.set_password(password)
         db.session.add(user)
         db.session.commit()
         self.login(email, password)
