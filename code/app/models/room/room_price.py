@@ -7,24 +7,40 @@ class Room_Price(db.Model):
     '''
     __tablename__ = 'room_price'
 
-    id = db.Column(db.Integer, primary_key=True)
-    type = db.Column(db.String(120), nullable=False)
-    price_weekday = db.Column(db.Float, nullable=False)
-    price_weekend = db.Column(db.Float, nullable=False)
+    _id = db.Column(db.Integer, primary_key=True)
+    _type = db.Column(db.String(120), nullable=False)
+    _price_weekday = db.Column(db.Float, nullable=False)
+    _price_weekend = db.Column(db.Float, nullable=False)
 
     def __init__(self, type, price_weekday, price_weekend):
-        self.type = type
-        self.price_weekday = price_weekday
-        self.price_weekend = price_weekend
+        self._type = type
+        self._price_weekday = price_weekday
+        self._price_weekend = price_weekend
 
-    def set_price_weekend(self, price_weekend):
-        self.price_weekend = price_weekend
+    @property
+    def type(self):
+        return self._type
+
+    @property
+    def price_weekday(self):
+        return self._price_weekday
+
+    @property
+    def price_weekend(self):
+        return self._price_weekend
  
-    def set_price_weekday(self, price_weekday):
-        self.price_weekday = price_weekday
-
+    @type.setter
     def set_type(self, type):
-        self.type = type
+        self._type = type
+
+    @price_weekday.setter
+    def set_price_weekday(self, price_weekday):
+        self._price_weekday = price_weekday
+
+    @price_weekday.setter
+    def set_price_weekend(self, price_weekend):
+        self._price_weekend = price_weekend
+
 
 
     def __repr__(self):

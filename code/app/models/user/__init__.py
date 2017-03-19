@@ -1,2 +1,2 @@
 from .user import User
-from .login import Login
+from .user_details import User_Details
