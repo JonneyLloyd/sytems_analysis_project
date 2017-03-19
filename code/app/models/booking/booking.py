@@ -1,4 +1,5 @@
 from app import app, db
+from sqlalchemy.ext.hybrid import hybrid_property
 
 
 class Booking(db.Model):
@@ -7,72 +8,73 @@ class Booking(db.Model):
     '''
     __tablename__ = 'bookings'
 
-    id = db.Column(db.Integer, primary_key=True)
-    _user_id = db.Column(db.Integer, nullable=False)
-    _room_id = db.Column(db.Integer, nullable=False)
-    _start_date = db.Column(db.Date, nullable=False)
-    _end_date = db.Column(db.Date, nullable=False)
-    _credit_card = db.Column(db.Integer, nullable=False)
-    _booking_price = db.Column(db.Float, nullable=False)
+    _id = db.Column('id', db.Integer, primary_key=True)
+    _user_id = db.Column('user_id', db.Integer, nullable=False)
+    _room_id = db.Column('room_id', db.Integer, nullable=False)
+    _start_date = db.Column('start_date', db.Date, nullable=False)
+    _end_date = db.Column('end_date', db.Date, nullable=False)
+    _credit_card = db.Column('credit_card', db.Integer, nullable=False)
+    _booking_price = db.Column('booking_price', db.Float, nullable=False)
 
     def __init__(self, user_id, room_id, start_date, end_date, credit_card, booking_price):
         self._user_id = user_id
         self._room_id = room_id
         self._start_date = start_date
-	self._end_date = end_date
-	self._credit_card = credit_card
-	self._booking_price = booking_price
+        self._end_date = end_date
+        self._credit_card = credit_card
+        self._booking_price = booking_price
 
-    @property
+    @hybrid_property
+    def id(self):
+        return self._id
+
+    @hybrid_property
     def user_id(self):
         return self._user_id
 
-    @property
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
+
+    @hybrid_property
     def room_id(self):
         return self._room_id
 
-    @property
+    @room_id.setter
+    def room_id(self, value):
+        self._room_id = value
+
+    @hybrid_property
     def start_date(self):
         return self._start_date
 
-    @property
+    @start_date.setter
+    def start_date(self, value):
+        self._start_date = value
+
+    @hybrid_property
     def end_date(self):
         return self._end_date
 
-    @property
+    @end_date.setter
+    def end_date(self, value):
+        self._end_date = value
+
+    @hybrid_property
     def credit_card(self):
         return self._credit_card
 
-    @property
+    @credit_card.setter
+    def credit_card(self, value):
+        self._credit_card = value
+
+    @hybrid_property
     def booking_price(self):
         return self._booking_price
 
-
-    @user_id.setter
-    def set_user_id(self, user_id):
-        self._user_id = user_id
- 
-    @room_id.setter
-    def set_room_id(self, room_id):
-        self._room_id = room_id
-
-    @start_date.setter
-    def set_start_date(self, start_date):
-        self._start_date = start_date
-
-    @end_date.setter
-    def set_end_date(self, end_date):
-        self._end_date = end_date
-
-    @credit_card.setter
-    def set_credit_card(self, credit_card):
-        self._credit_card = credit_card
-
     @booking_price.setter
-    def set_booking_price(self, booking_price):
-        self._booking_price = booking_price
-
-
+    def booking_price(self, value):
+        self._booking_price = value
 
     def __repr__(self):
-        return '<Booking ref %r>' % self.id
+        return '<Booking ref %r>' % self._id

@@ -1,12 +1,15 @@
 from app import app, db
 from enum import Enum
+from sqlalchemy.ext.hybrid import hybrid_property
 
 from app.models.permission import Permission, PermissionEnum
 
 
+# factor out (business logic)?
 class RoleEnum(Enum):
     ADMIN = 'ADMIN'
     MANAGER = 'MANAGER'
+    STAFF = 'STAFF'
     GUEST = 'GUEST'
     ANONYMOUS = 'ANONYMOUS'
 
@@ -28,13 +31,35 @@ class Role(db.Model):
     '''
     __tablename__ = 'role'
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), unique=True, nullable=False)
+    _id = db.Column('id', db.Integer, primary_key=True)
+    _name = db.Column('name', db.String(120), unique=True, nullable=False)
 
-    permissions = db.relationship('Permission', secondary=role_permission, backref='roles')
+    _permissions = db.relationship('Permission', secondary=role_permission, backref='roles')
 
-    def __init__(self, name):
+    def __init__(self, name, permissions=None):
         self.name = name
+        if permissions is not None:
+            self._permissions = permissions
+
+    @hybrid_property
+    def id(self):
+        return self._id
+
+    @hybrid_property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        self._name = value
+
+    @hybrid_property
+    def permissions(self):
+        return self._permissions
+
+    @permissions.setter
+    def permissions(self, value):
+        self._permissions = value
 
     def __repr__(self):
         return '<Role %r>' % self.name
