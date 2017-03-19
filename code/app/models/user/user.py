@@ -19,16 +19,13 @@ class User(db.Model):
 
     def __init__(self, email):         
 	self._email = email  
-	self.set_role_id()
+	self.set_role()
          
 
     @property
     def password_hash(self):
         return self._password_hash
 
-    @property
-    def role_id(self):
-        return self._role_id
 
     @property
     def email(self):
