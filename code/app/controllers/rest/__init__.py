@@ -3,7 +3,8 @@ import types
 from flask import g, request, abort, jsonify
 from flask_httpauth import HTTPBasicAuth
 from flask_restful import Resource
-from app import app, api, db
+from flask import current_app as app
+from app.extensions import db, api
 
 from app.models.user import User
 

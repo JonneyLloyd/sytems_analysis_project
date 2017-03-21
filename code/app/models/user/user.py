@@ -1,4 +1,5 @@
-from app import app, db
+from flask import current_app as app
+from app.extensions import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.ext.hybrid import hybrid_property
 

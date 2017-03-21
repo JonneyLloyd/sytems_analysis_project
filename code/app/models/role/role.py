@@ -1,4 +1,5 @@
-from app import app, db
+from flask import current_app as app
+from app.extensions import db
 from enum import Enum
 from sqlalchemy.ext.hybrid import hybrid_property
 
