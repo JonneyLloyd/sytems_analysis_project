@@ -10,7 +10,7 @@ from app.controllers.frontend import error
 from app.controllers.frontend import test
 from app.controllers.frontend import booking
 
-from app.api.booking_view import Booking_view
+
 
 
 @app.route('/')
