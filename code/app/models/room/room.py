@@ -10,17 +10,13 @@ class Room(db.Model):
     __tablename__ = 'rooms'
 
     _id = db.Column('id', db.Integer, primary_key=True)
-    _type = db.Column('type', db.Integer, db.ForeignKey('rooms.id'), nullable=False)
+    _type = db.Column('type', db.Integer, db.ForeignKey('room_price.id'), nullable=False)
     _number = db.Column('number', db.Integer, nullable=False)
     _occupancy = db.Column('occupancy', db.Integer, nullable=False)
     _availability = db.Column('availability', db.String(120), nullable=False)
     _clean = db.Column('clean', db.Boolean, nullable=False)
 
-    '''
-	TODO
-	use backref  to room_price
-	and another backref in booking to room
-    '''
+    _room_price = db.relationship('RoomPrice')
 
     def __init__(self, type, number, occupancy, availability, clean):
         self._type = type
@@ -68,6 +64,14 @@ class Room(db.Model):
     @clean.setter
     def clean(self, value):
         self._clean = value
+
+    @hybrid_property
+    def room_price(self):
+        return self._room_price
+
+    @room_price.setter
+    def room_price(self, value):
+        self._room_price = value
 
     def __repr__(self):
         return '<Room %r:%r:%r>' % self._id, self._type, self._number

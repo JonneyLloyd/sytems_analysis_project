@@ -8,6 +8,9 @@ from app.controllers.frontend import navigation
 from app.controllers.frontend import accounts
 from app.controllers.frontend import error
 from app.controllers.frontend import test
+from app.controllers.frontend import booking
+
+
 
 
 @app.route('/')
@@ -18,7 +21,6 @@ def home():
     else:
         text = "Hello "+g.user.email+"!  <a href='/accounts/logout'>Logout</a>"
     return render_template('layout.html', text=text)
-
 
 @app.before_request
 def load_user():

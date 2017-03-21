@@ -10,12 +10,15 @@ class Booking(db.Model):
     __tablename__ = 'bookings'
 
     _id = db.Column('id', db.Integer, primary_key=True)
-    _user_id = db.Column('user_id', db.Integer, nullable=False)
-    _room_id = db.Column('room_id', db.Integer, nullable=False)
+    _user_id = db.Column('user_id', db.Integer, db.ForeignKey('users.id'), nullable=False)
+    _room_id = db.Column('room_id', db.Integer, db.ForeignKey('rooms.id'),  nullable=False)
     _start_date = db.Column('start_date', db.Date, nullable=False)
     _end_date = db.Column('end_date', db.Date, nullable=False)
     _credit_card = db.Column('credit_card', db.Integer, nullable=False)
     _booking_price = db.Column('booking_price', db.Float, nullable=False)
+
+    _user = db.relationship('User')
+    _room = db.relationship('Room')
 
     def __init__(self, user_id, room_id, start_date, end_date, credit_card, booking_price):
         self._user_id = user_id
@@ -76,6 +79,23 @@ class Booking(db.Model):
     @booking_price.setter
     def booking_price(self, value):
         self._booking_price = value
+
+    @hybrid_property
+    def room(self):
+        return self._room
+
+    @room.setter
+    def room(self, value):
+        self._room = value
+
+    @hybrid_property
+    def user(self):
+        return self._user
+
+    @user.setter
+    def user(self, value):
+        self._user = value
+
 
     def __repr__(self):
         return '<Booking ref %r>' % self._id
