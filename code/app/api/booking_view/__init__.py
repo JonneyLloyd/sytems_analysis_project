@@ -1,1 +1,1 @@
-from .booking_view import Booking_view
+from .booking_view import BookingView
