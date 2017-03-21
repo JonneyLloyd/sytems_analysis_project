@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-  {% if session['logged_in'] %}
-      <table border = 1>
+  <table border = 1>
          {% for key, value in result.iteritems() %}
             <tr>
                <th> {{ key }} </th>
@@ -10,8 +9,4 @@
             
          {% endfor %}
       </table>
-
-  {% else %}
-    <! need to redirect here  !>
-  {% endif %}
 {% endblock %}

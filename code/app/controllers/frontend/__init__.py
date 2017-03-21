@@ -10,6 +10,7 @@ from app.models.permission import Permission
 
 from app.auth.login import LoginManager, login_required, UserIsNotAuthorized
 from app.auth.access import user_is, user_can, UserIsNotPermitted
+from app.api.booking_view import Booking_view
 
 
 @app.route('/accounts/register', methods=['GET'])
@@ -65,6 +66,18 @@ def logout():
     LoginManager.logout()
     return redirect(url_for('home'))
 
+@app.route('/booking/bookingForm')
+def booking_view():
+   return render_template('booking/bookingForm.html')
+
+@app.route('/booking/booking',methods = ['POST','GET'])
+def result():
+      if request.method == 'POST':
+      	id = request.form['user_id']
+      	result = Booking_view.get_booking_for_user(id)
+      	if result != False:
+      		return render_template("booking/bookingView.html",result = result)
+
 
 @app.before_request
 def load_user():
@@ -103,3 +116,4 @@ def user_not_permitted(error):
 @app.errorhandler(404)
 def page_not_found(error):
     return 'This page does not exist', 404  # TODO: Add template
+
