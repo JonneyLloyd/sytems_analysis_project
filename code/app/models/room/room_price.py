@@ -3,7 +3,7 @@ from app.extensions import db
 from sqlalchemy.ext.hybrid import hybrid_property
 
 
-class Room_Price(db.Model):
+class RoomPrice(db.Model):
     '''
     Database representation of room prices
     '''
