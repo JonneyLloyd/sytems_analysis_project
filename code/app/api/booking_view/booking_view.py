@@ -9,7 +9,7 @@ class BookingView(object):
     	booking = Booking.query.filter_by(user_id=user_id).first()
     	result = {'room_id': booking.room_id, 'start_date': booking.start_date,
     		 'end_date': booking.end_date, 'booking_price': booking.booking_price,
-             'name':booking.user}
+             'name':booking.user.details.first_name}
     	if not booking:
     		return False
     	else:
