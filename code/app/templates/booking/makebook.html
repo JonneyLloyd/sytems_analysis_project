@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <form action="/accounts/makebook" method="POST">
+      <input type="room_id" name="room_id" placeholder="room_id">
+      <input type="room_id" name="start_date" placeholder="start_date">
+      <input type="room_id" name="end_date" placeholder="end_date">
+      <input type="room_id" name="credit_card" placeholder="credit_card">
+
+
+      <input type="submit" value="BookRoom">
+    </form>
+
+{% endblock %}
