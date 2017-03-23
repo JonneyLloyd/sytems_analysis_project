@@ -11,11 +11,6 @@ def navbar():
         View('Log in', 'login'),
         View('Log out', 'logout'),
         Subgroup(
-            'Booking',
-        View('Booking', 'make_book_form'),
-        View('Cancel', 'cancel_booking_form'),
-        ),
-        Subgroup(
             'Test',
             View('admin role', 'special_admin'),
             View('guest role', 'special_guest'),
