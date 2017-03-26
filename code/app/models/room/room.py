@@ -25,7 +25,7 @@ class Room(db.Model):
         self._availability = availability
         self._clean = clean
 
-    @property
+    @hybrid_property
     def type(self):
         return self._type
 
@@ -33,7 +33,7 @@ class Room(db.Model):
     def type(self, value):
         self._type = value
 
-    @property
+    @hybrid_property
     def number(self):
         return self._number
 
@@ -41,7 +41,7 @@ class Room(db.Model):
     def number(self, value):
         self._number = value
 
-    @property
+    @hybrid_property
     def occupancy(self):
         return self._occupancy
 
@@ -49,7 +49,7 @@ class Room(db.Model):
     def occupancy(self, value):
         self._occupancy = value
 
-    @property
+    @hybrid_property
     def availability(self):
         return self._availability
 
@@ -57,7 +57,7 @@ class Room(db.Model):
     def availability(self, value):
         self._availability = value
 
-    @property
+    @hybrid_property
     def clean(self):
         return self._clean
 
