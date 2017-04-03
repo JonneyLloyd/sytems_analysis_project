@@ -17,7 +17,6 @@ class Room(db.Model):
     _clean = db.Column('clean', db.Boolean, nullable=False)
 
     _room_price = db.relationship('RoomPrice')
-
     def __init__(self, type, number, occupancy, availability, clean):
         self._type = type
         self._number = number
@@ -74,4 +73,4 @@ class Room(db.Model):
         self._room_price = value
 
     def __repr__(self):
-        return '<Room %r:%r:%r>' % self._id, self._type, self._number
+        return '<Room %r:%r:%r>' % (self._id, self._type, self._number)

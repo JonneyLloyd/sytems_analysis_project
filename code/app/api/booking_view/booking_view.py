@@ -40,7 +40,7 @@ class BookingView(object):
         bookings = Booking.query.filter(Booking.start_date <= datetime.strptime(date, '%Y-%m-%d').date(),
                                         Booking.end_date >= datetime.strptime(date, '%Y-%m-%d').date()).all()
         if not bookings:
-    		return False
+            return False;
         for booking in bookings:
             info = {
                 'room_id': booking.room_id,
