@@ -1,5 +1,8 @@
 from app.models.room import Room
 from app.models.room import RoomPrice
+from app.models.room import RoomStatus
+from datetime import datetime
+from app.extensions import db
 
 class RoomManager(object):
 
@@ -39,3 +42,44 @@ class RoomManager(object):
             'weekday_price':room.price_weekday,
             'weekend_price':room.price_weekend}
             return result
+
+        @staticmethod
+        def get_rooms_occupied_on_date(date, room_type):
+            status = RoomStatus.query.filter(RoomStatus.date == datetime.strptime(date, '%Y-%m-%d').date(),
+                                            RoomStatus.type == room_type).first()
+            if not status:
+                return False
+            result = {
+                    'Room':status.room_price.type,
+                    'Occupied':status.qty}
+            return result
+
+        '''
+        Func will reduce roomstatus qty by one
+        If no entry will generate a new one
+        Hardcoded to max 20 rooms for now
+        '''
+        @staticmethod
+        def set_availability_for_booking(date, room_type):
+            booking = RoomStatus.query.filter(RoomStatus.date == datetime.strptime(date, '%Y-%m-%d').date(),
+                                            RoomStatus.type == room_type).first()
+            if not booking:
+                booking = RoomStatus(date, room_type, 20)
+                db.session.add(booking)
+            if booking.qty > 0:
+                booking.qty -=1
+            else:
+                return False
+            db.session.commit()
+
+        '''
+        Use when booking canceled
+        '''
+        @staticmethod
+        def increase_availability_for_booking(date, room_type):
+            booking = RoomStatus.query.filter(RoomStatus.date == datetime.strptime(date, '%Y-%m-%d').date(),
+                                            RoomStatus.type == room_type).first()
+            if not booking:
+                return False
+            booking.qty +=1
+            db.session.commit()

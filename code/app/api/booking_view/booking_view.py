@@ -75,12 +75,23 @@ class BookingView(object):
     to make this and forecasting more accurate
     '''
     @staticmethod
-    def view_sales_between_dates(start_date, end_date):
+    def get_sales_between_dates(start_date, end_date):
         bookings = Booking.query.filter(Booking.start_date >= datetime.strptime(start_date, '%Y-%m-%d').date(),
                                         Booking.start_date <= datetime.strptime(end_date, '%Y-%m-%d').date()).all()
         if not bookings:
     		return False
+        result = []
         total = 0.0;
         for booking in bookings:
+            info = {
+                'room_id': booking.room_id,
+                'date': booking.start_date,
+                'booking_price': booking.booking_price,
+                'first_name':booking.user.details.first_name,
+                'last_name':booking.user.details.last_name
+            }
+            result.append(info)
             total = total + booking.booking_price
-    	return total
+        total_ret = {'total': total}
+        result.append(total_ret)
+    	return result

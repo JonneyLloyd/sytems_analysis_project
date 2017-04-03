@@ -18,19 +18,39 @@ def result():
 
 '''
 Quick test for sales and room manager. Will remove
-print "/nTEST"
-print BookingView.view_sales_between_dates("2015-01-01", "2017-01-01")
-print "END TEST/n"
+'''
 
-print "/nTEST"
+
+'''
+
+print "\nTEST get_rooms_occupied_on_date"
+print RoomManager.get_rooms_occupied_on_date("2017-01-01", 2)
+print "END TEST\n"
+
+RoomManager.set_availability_for_booking("2017-01-01", 2)
+
+print "\nTEST get_rooms after decrease"
+print RoomManager.get_rooms_occupied_on_date("2017-01-01", 2)
+print "END TEST\n"
+
+print "\nTEST increase booking"
+RoomManager.increase_availability_for_booking("2017-01-01", 2)
+print RoomManager.get_rooms_occupied_on_date("2017-01-01", 2)
+print "END TEST\n"
+
+
+
+
+
+print "\nTEST"
 print RoomManager.get_room_price_from_type('single')
-print "END TEST/n"
+print "END TEST\n"
 
-print "/nTEST"
+print "\nTEST"
 print RoomManager.get_room_price_from_number(101)
-print "END TEST/n"
+print "END TEST\n"
 
-print "/nTEST"
+print "\nTEST"
 print RoomManager.get_room(101)
-print "END TEST/n"
+print "END TEST\n"
 '''
