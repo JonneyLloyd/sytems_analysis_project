@@ -7,12 +7,14 @@ class BookingView(object):
     @staticmethod
     def get_booking_for_user(user_id):
     	booking = Booking.query.filter_by(user_id=user_id).first()
-    	result = {'room_id': booking.room_id,
+    	result = {
+            'room_id': booking.room_id,
             'start_date': booking.start_date,
             'end_date': booking.end_date,
             'booking_price': booking.booking_price,
             'first_name':booking.user.details.first_name,
-            'last_name':booking.user.details.last_name}
+            'last_name':booking.user.details.last_name
+        }
     	if not booking:
     		return False
     	else:
@@ -21,13 +23,14 @@ class BookingView(object):
     @staticmethod
     def get_booking_by_credit_card(credit_card):
     	booking = Booking.query.filter_by(credit_card=credit_card).first()
-    	result = {'room_id': booking.room_id,
+    	result = {
+            'room_id': booking.room_id,
             'start_date': booking.start_date,
             'end_date': booking.end_date,
             'booking_price': booking.booking_price,
             'first_name':booking.user.details.first_name,
             'last_name':booking.user.details.last_name
-             }
+        }
     	if not booking:
     		return False
     	else:

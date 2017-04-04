@@ -9,13 +9,15 @@ class RoomManager(object):
         @staticmethod
         def get_room(number):
         	room = Room.query.filter(Room.number == number).first()
-        	result = {'number': room.number,
-            'type':room.type,
-            'occupancy':room.occupancy,
-            'availability':room.availability,
-            'clean':room.clean,
-            'weekday_price':room.room_price.price_weekday,
-            'weekend_price':room.room_price.price_weekend}
+        	result = {
+                'number': room.number,
+                'type':room.type,
+                'occupancy':room.occupancy,
+                'availability':room.availability,
+                'clean':room.clean,
+                'weekday_price':room.room_price.price_weekday,
+                'weekend_price':room.room_price.price_weekend
+            }
         	if not room:
         		return False
         	else:
@@ -26,8 +28,9 @@ class RoomManager(object):
         def get_room_price_from_number(number):
         	room = Room.query.filter(Room.number == number).first()
         	result = {
-            'weekday_price':room.room_price.price_weekday,
-            'weekend_price':room.room_price.price_weekend}
+                'weekday_price':room.room_price.price_weekday,
+                'weekend_price':room.room_price.price_weekend
+            }
         	if not room:
         		return False
         	else:
@@ -39,8 +42,9 @@ class RoomManager(object):
             if not room:
                 return False
             result = {
-            'weekday_price':room.price_weekday,
-            'weekend_price':room.price_weekend}
+                'weekday_price':room.price_weekday,
+                'weekend_price':room.price_weekend
+            }
             return result
 
         @staticmethod
@@ -50,8 +54,9 @@ class RoomManager(object):
             if not status:
                 return False
             result = {
-                    'Room':status.room_price.type,
-                    'Occupied':status.qty}
+                'Room':status.room_price.type,
+                'Occupied':status.qty
+            }
             return result
 
         '''
