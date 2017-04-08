@@ -43,9 +43,9 @@ class RoomPrice(db.Model):
     def price_weekend(self):
         return self._price_weekend
 
-    @price_weekday.setter
+    @price_weekend.setter
     def price_weekend(self, value):
         self._price_weekend = value
 
     def __repr__(self):
-        return '<Room %r:%r>' % self._id, self._type
+        return '<Room %r>' % self._type
