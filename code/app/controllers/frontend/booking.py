@@ -46,8 +46,6 @@ RoomManager.increase_availability_for_booking("2017-01-01", 1)
 print RoomManager.get_rooms_occupied_on_date("2017-01-01", 1)
 print "END TEST\n"
 
-
-
 print "\nTEST"
 print RoomManager.get_room_price_from_type('single')
 print "END TEST\n"
@@ -59,4 +57,29 @@ print "END TEST\n"
 print "\nTEST"
 print RoomManager.get_room(101)
 print "END TEST\n"
+
+print "\nTEST"
+print RoomManager.get_room_availablity(101)
+print "END TEST\n"
+
+print "\nTEST"
+print RoomManager.get_room_clean(101)
+print "END TEST\n"
+
+print "\nTEST"
+print RoomManager.set_room_availablity(101, 'on fire')
+print "END TEST\n"
+
+print "\nTEST"
+print RoomManager.set_room_clean(101,  False)
+print "END TEST\n"
+
+print "\nTEST"
+print RoomManager.get_room_availablity(101)
+print "END TEST\n"
+
+print "\nTEST"
+print RoomManager.get_room_clean(101)
+print "END TEST\n"
+
 '''

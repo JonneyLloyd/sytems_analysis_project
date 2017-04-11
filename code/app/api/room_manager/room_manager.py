@@ -50,6 +50,45 @@ class RoomManager(object):
         return result
 
     @staticmethod
+    def get_room_clean(number):
+        room = Room.query.filter(Room.number == number).first()
+        if not room:
+            return False
+        result = {
+            'Room clean status':room.clean,
+        }
+        return result
+
+    @staticmethod
+    def set_room_clean(number,clean):
+        room = Room.query.filter(Room.number == number).first()
+        if not room:
+            return False
+        room.clean = clean
+        db.session.commit()
+        return True
+
+    @staticmethod
+    def get_room_availablity(number):
+        room = Room.query.filter(Room.number == number).first()
+        if not room:
+            return False
+        result = {
+            'Room availability':room.availability,
+        }
+        return result
+
+    @staticmethod
+    def set_room_availablity(number,availability):
+        room = Room.query.filter(Room.number == number).first()
+        if not room:
+            return False
+        room.availability = availability
+        db.session.commit()
+        return True
+
+
+    @staticmethod
     def get_rooms_occupied_on_date(date, room_type):
         status = RoomStatus.query.filter(RoomStatus.date == datetime.strptime(date, '%Y-%m-%d').date(),
                                         RoomStatus.type == room_type).first()
