@@ -24,6 +24,7 @@ Quick test for sales and room manager. Will remove
 '''
 
 print "\nTEST get_rooms_occupied_on_date"
+
 print RoomManager.get_rooms_occupied_on_date("2017-01-01", 1)
 print "END TEST\n"
 
