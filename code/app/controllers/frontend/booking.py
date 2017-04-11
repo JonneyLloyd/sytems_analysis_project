@@ -24,21 +24,26 @@ Quick test for sales and room manager. Will remove
 '''
 
 print "\nTEST get_rooms_occupied_on_date"
-print RoomManager.get_rooms_occupied_on_date("2017-01-01", 2)
+print RoomManager.get_rooms_occupied_on_date("2017-01-01", 1)
 print "END TEST\n"
 
-RoomManager.set_availability_for_booking("2017-01-01", 2)
+RoomManager.set_availability_for_booking("2017-01-01", 1)
+RoomManager.set_availability_for_booking("2017-01-01", 1)
+RoomManager.set_availability_for_booking("2017-01-01", 1)
+RoomManager.set_availability_for_booking("2017-01-01", 1)
 
 print "\nTEST get_rooms after decrease"
-print RoomManager.get_rooms_occupied_on_date("2017-01-01", 2)
+print RoomManager.get_rooms_occupied_on_date("2017-01-01", 1)
 print "END TEST\n"
 
 print "\nTEST increase booking"
-RoomManager.increase_availability_for_booking("2017-01-01", 2)
-print RoomManager.get_rooms_occupied_on_date("2017-01-01", 2)
+RoomManager.increase_availability_for_booking("2017-01-01", 1)
+RoomManager.increase_availability_for_booking("2017-01-01", 1)
+RoomManager.increase_availability_for_booking("2017-01-01", 1)
+RoomManager.increase_availability_for_booking("2017-01-01", 1)
+
+print RoomManager.get_rooms_occupied_on_date("2017-01-01", 1)
 print "END TEST\n"
-
-
 
 
 
