@@ -14,6 +14,7 @@ class RoomStatus(db.Model):
 
     _room_price = db.relationship('RoomPrice')
 
+
     def __init__(self, date, type, qty):
         self._date = date
         self._type = type

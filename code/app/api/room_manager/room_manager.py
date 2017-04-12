@@ -93,11 +93,15 @@ class RoomManager(object):
         status = RoomStatus.query.filter(RoomStatus.date == datetime.strptime(date, '%Y-%m-%d').date(),
                                         RoomStatus.type == room_type).first()
         if not status:
-            return False
-        result = {
-            'Room':status.room_price.type,
-            'Occupied':status.qty
-        }
+            result = {
+                'Room':room_type,
+                'Occupied':0
+            }
+        else:
+            result = {
+                'Room':status.room_price.type,
+                'Occupied':status.qty
+            }
         return result
 
     '''

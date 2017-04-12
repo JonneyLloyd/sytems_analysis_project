@@ -9,6 +9,7 @@ from app.controllers.frontend import accounts
 from app.controllers.frontend import error
 from app.controllers.frontend import test
 from app.controllers.frontend import booking
+from app.controllers.frontend import rooms
 
 
 
