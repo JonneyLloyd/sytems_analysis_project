@@ -2,16 +2,17 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block title_page %}
-  Booking
+  Rooms
 {% endblock %}
 
 {% block container %}
   <div class="container">
     {% from "macros/flash.html" import render_flashed_messages %}
     {{ render_flashed_messages() }}
-    <form class="" action="booking" method="POST">
+    <form class="" action="rooms" method="POST">
         {{ form.csrf_token }}
-        {{ wtf.form_field(form.user_id) }}
+        {{ wtf.form_field(form.date) }}
+        {{ wtf.form_field(form.room_type) }}
       <input class="btn btn-primary" type="submit" value="submit">
     </form>
   </div>
