@@ -1,8 +1,8 @@
 from app.models.room import Room
 from app.models.room import RoomPrice
 from app.models.room import RoomStatus
-from observable import Observable
-from observer_test import ObserverTest
+from app.api.utils import Observable
+from app.api.utils import ObserverTest
 from datetime import datetime
 from app.extensions import db
 
