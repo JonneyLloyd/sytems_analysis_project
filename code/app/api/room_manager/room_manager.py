@@ -64,6 +64,10 @@ class RoomManager(object):
         room = Room.query.filter(Room.number == number).first()
         if not room:
             return False
+        if clean == 'True':
+            clean = True
+        elif clean == "False":
+            clean = False
         room.clean = clean
         db.session.commit()
         return True
