@@ -5,7 +5,6 @@ from app.api.room_manager import RoomManager
 from app.forms.rooms import RoomAvailabilityForm
 from app.forms.rooms import SetRoomCleanForm
 
-
 @app.route('/rooms/rooms', methods=['GET', 'POST'])
 def rooms():
     form = RoomAvailabilityForm()
