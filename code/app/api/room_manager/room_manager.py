@@ -118,7 +118,7 @@ class RoomManager(object):
         observable = Observable()
         observer_test = ObserverTest()
         observable.register(observer_test)
-        booking = RoomStatus.query.filter(RoomStatus.date == datetime.strptime(date, '%Y-%m-%d').date(),
+        booking = RoomStatus.query.filter(RoomStatus.date == date,
                                         RoomStatus.type == room_type).first()
         if not booking:
             booking = RoomStatus(date, room_type, 20)
@@ -137,7 +137,7 @@ class RoomManager(object):
     '''
     @staticmethod
     def increase_availability_for_booking(date, room_type):
-        booking = RoomStatus.query.filter(RoomStatus.date == datetime.strptime(date, '%Y-%m-%d').date(),
+        booking = RoomStatus.query.filter(RoomStatus.date == date,
                                         RoomStatus.type == room_type).first()
         if not booking:
             return False
