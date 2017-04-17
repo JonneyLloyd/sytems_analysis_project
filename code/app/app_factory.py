@@ -9,15 +9,15 @@ class AppFactory(object):
         app = Flask(__name__)
         app.config.from_object(config)
         with app.app_context():
-            AppFactory._load_extensions(app)
+            AppFactory._load_extensions_before(app)
             AppFactory._build_database()
             AppFactory._load_controllers(app)
+            AppFactory._load_extensions_after(app)
         return app
 
     @staticmethod
-    def _load_extensions(app):
+    def _load_extensions_before(app):
         db.init_app(app)
-        api.init_app(app)
         bootstrap.init_app(app)
         nav.init_app(app)
 
@@ -34,3 +34,7 @@ class AppFactory(object):
         # Load controllers/endpoints
         from app.controllers import frontend
         from app.controllers import rest
+
+    @staticmethod
+    def _load_extensions_after(app):
+        api.init_app(app)

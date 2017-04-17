@@ -10,6 +10,7 @@ def navbar():
         View('Register', 'register'),
         View('Log in', 'login'),
         View('Log out', 'logout'),
+        View('Profile', 'profile'),
         Subgroup(
             'Booking',
             View('Booking', 'make_book_form'),

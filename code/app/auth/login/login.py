@@ -3,15 +3,17 @@ from app.extensions import db
 from app.models.user import User
 from app.models.role import RoleEnum, RoleFactory
 
+from app.api.user_manager import UserManager
 
-class LoginManager(object):  # should login and user be separate models??
+
+class LoginManager(object):
 
     @staticmethod
     def login(email, password):
-        user = User.query.filter_by(email=email).first()
+        user = UserManager.get_user(email)
 
         if not user or not user.verify_password(password):
-            return False  # exception??
+            return False
 
         session['logged_in'] = True
         session['user_id'] = user.id
@@ -23,28 +25,13 @@ class LoginManager(object):  # should login and user be separate models??
         session['logged_in'] = False
         session.pop('user_id', None)
 
-    @staticmethod                   # Separate class/module?
-    def register(email, password):  # validation should have already been done?
-        if User.query.filter_by(email=email).first():
-            # flash('User exists already!')
-            return False  # exception??
-
-        user = User(email)
-        user.password = password
-        user.role = RoleFactory.get_role(RoleEnum.GUEST)
-        db.session.add(user)
-        db.session.commit()
-        LoginManager.login(email, password)
-        return True
-
     @staticmethod
     def load_user():
         if "user_id" in session:
-            user = User.query.filter_by(id=session["user_id"]).first()
+            user = UserManager.get_user_by_id(id=session["user_id"])
             session['logged_in'] = True
         else:
-            user = User(None)  # Anonymous User instead? TODO: how to track the user session without a user_id
-            user.role = RoleFactory.get_role(RoleEnum.ANONYMOUS)
+            user = UserManager.get_anonymous_user()
             session['logged_in'] = False
         g.user = user
 

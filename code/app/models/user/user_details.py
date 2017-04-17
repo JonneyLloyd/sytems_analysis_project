@@ -12,9 +12,9 @@ class UserDetails(db.Model):
     _id = db.Column('id', db.Integer, primary_key=True)
     _first_name = db.Column('first_name', db.String(120), nullable=False)
     _last_name = db.Column('last_name', db.String(120), nullable=False)
-    _contact_number = db.Column('contact_number', db.Integer)
+    _contact_number = db.Column('contact_number', db.String(30))
 
-    def __init__(self, first_name, last_name, contact_number=None):
+    def __init__(self, first_name=None, last_name=None, contact_number=None):
         self._first_name = first_name
         self._last_name = last_name
         self._contact_number = contact_number
@@ -34,14 +34,6 @@ class UserDetails(db.Model):
     @last_name.setter
     def last_name(self, value):
         self._last_name = value
-
-    @hybrid_property
-    def email(self):
-        return self._email
-
-    @email.setter
-    def email(self, value):
-        self._email = value
 
     @hybrid_property
     def contact_number(self):
