@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+    <p> Please enter your creidt card number of the booking you wish to cancel</p>
+    <form action="/accounts/cancelbook" method="POST">
+      <input type="text" name="credit_card" placeholder="credit_card">
+      <input type="text" name="booked_room_number" placeholder="Room Number">
+      <input type="text" name="booked_start_date" placeholder="Booking Start Date">
+
+
+      <input type="submit" value="CancelRoom">
+    </form>
+
+{% endblock %}
