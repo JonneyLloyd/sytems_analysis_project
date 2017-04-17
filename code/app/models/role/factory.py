@@ -29,10 +29,10 @@ class RoleFactory(object):
         # external config?
         options = {
             RoleEnum.ADMIN:     [],
-            RoleEnum.MANAGER:   [P.CREATE_OTHER_USER, P.EDIT_OTHER_USER, P.DELETE_OTHER_USER,
+            RoleEnum.MANAGER:   [P.VIEW_OTHER_USER, P.CREATE_OTHER_USER, P.EDIT_OTHER_USER, P.DELETE_OTHER_USER,
                                  P.VIEW_OTHERS_BOOKING, P.MAKE_OTHERS_BOOKING, P.EDIT_OTHERS_BOOKING, P.CANCEL_OTHERS_BOOKING],
             RoleEnum.STAFF:     [P.VIEW_OTHERS_BOOKING, P.MAKE_OTHERS_BOOKING, P.EDIT_OTHERS_BOOKING, P.CANCEL_OTHERS_BOOKING],
-            RoleEnum.GUEST:     [P.EDIT_USER, P.DELETE_USER],
+            RoleEnum.GUEST:     [P.VIEW_USER, P.EDIT_USER, P.DELETE_USER],
             RoleEnum.ANONYMOUS: [P.CREATE_USER]
         }
         if role_enum in options:
