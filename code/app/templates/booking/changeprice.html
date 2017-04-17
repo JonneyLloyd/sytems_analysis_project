@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <form action="/accounts/changeprice" method="POST">
+      <input type="text" name="room_id" placeholder="room_id">
+      <input type="text" name="weekday_price" placeholder="weekday_price">
+      <input type="text" name="weekend_price" placeholder="weekend_price">
+
+
+      <input type="submit" value="ChangePrice">
+    </form>
+
+{% endblock %}

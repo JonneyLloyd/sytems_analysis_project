@@ -5,6 +5,6 @@ from flask_nav import Nav
 
 # Factories?
 db = SQLAlchemy()
-api = Api()
 bootstrap = Bootstrap()
 nav = Nav()
+api = Api()
