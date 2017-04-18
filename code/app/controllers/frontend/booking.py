@@ -95,7 +95,6 @@ Quick test for sales and room manager. Will remove
 '''
 
 
-'''
 
 print "\nTEST get_rooms_occupied_on_date"
 
@@ -155,5 +154,3 @@ print "END TEST\n"
 print "\nTEST"
 print RoomManager.get_room_clean(101)
 print "END TEST\n"
-
-'''

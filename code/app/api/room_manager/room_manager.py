@@ -6,12 +6,16 @@ from app.api.utils import ObserverTest
 from datetime import datetime
 from app.extensions import db
 
+observable = Observable()
+observer_test = ObserverTest()
+observable.register(observer_test)
+
 class RoomManager(object):
 
     @staticmethod
     def get_room(number):
-    	room = Room.query.filter(Room.number == number).first()
-    	result = {
+        room = Room.query.filter(Room.number == number).first()
+        result = {
             'number': room.number,
             'type':room.type,
             'occupancy':room.occupancy,
@@ -20,23 +24,23 @@ class RoomManager(object):
             'weekday_price':room.room_price.price_weekday,
             'weekend_price':room.room_price.price_weekend
         }
-    	if not room:
-    		return False
-    	else:
-    		return result
+        if not room:
+            return False
+        else:
+            return result
 
 
     @staticmethod
     def get_room_price_from_number(number):
-    	room = Room.query.filter(Room.number == number).first()
-    	result = {
+        room = Room.query.filter(Room.number == number).first()
+        result = {
             'weekday_price':room.room_price.price_weekday,
             'weekend_price':room.room_price.price_weekend
         }
-    	if not room:
-    		return False
-    	else:
-    		return result
+        if not room:
+            return False
+        else:
+            return result
 
     @staticmethod
     def get_room_price_from_type(room_type):
@@ -115,9 +119,6 @@ class RoomManager(object):
     '''
     @staticmethod
     def set_availability_for_booking(date, room_type):
-        observable = Observable()
-        observer_test = ObserverTest()
-        observable.register(observer_test)
         booking = RoomStatus.query.filter(RoomStatus.date == date,
                                         RoomStatus.type == room_type).first()
         if not booking:
