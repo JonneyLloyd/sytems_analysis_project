@@ -8,7 +8,7 @@ class BookingView(object):
     def get_booking_for_user(user_id):
         booking = Booking.query.filter_by(user_id=user_id).first()
         if not booking:
-        return False
+            return False
         result = {
             'room_id': booking.room_id,
             'start_date': booking.start_date,
