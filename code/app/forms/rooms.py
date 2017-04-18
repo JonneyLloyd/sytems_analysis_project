@@ -26,7 +26,7 @@ class SetRoomCleanForm(Form):
     clean = RadioField('Clean',  choices=[('True','Clean'),('False','Unclean')],
                         default='Clean', validators=[Required()])
     available = RadioField('Available',  choices=[('Available','Available'),('Not Ready','Not Ready'), ('Occupied','Occupied')],
-                        default='Clean', validators=[Required()])
+                        default='Available', validators=[Required()])
     def __init__(self, *args, **kwargs):
         super(SetRoomCleanForm, self).__init__(*args, **kwargs)
     def validate(self):
