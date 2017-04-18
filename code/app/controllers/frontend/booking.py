@@ -5,6 +5,7 @@ from app.api.booking_view import BookingView
 from app.api.room_manager import RoomManager
 from app.forms.booking import BookingForm
 from flask import render_template, redirect, url_for, request, session
+from app.auth.login import LoginManager, login_required
 
 from app.api.booking_manager import cancelBooking, makeBooking
 from app.api.change_room_price import changePrice
@@ -12,15 +13,18 @@ from app.api.booking_manager import cancelBooking, makeBooking
 from app.api.change_room_price import changePrice
 
 @app.route('/booking/booking', methods=['GET', 'POST'])
+@login_required
 def booking():
     form = BookingForm()
     if form.validate_on_submit():
-        result = BookingView.get_booking_for_user(user_id=form.user_id.data)
-        return render_template("booking/bookingView.html",result = result)
+        result = BookingView.get_booking_for_user(g.user.id)
+        if result:
+            return render_template("booking/bookingView.html",result = result)
 
     return render_template('booking/bookingForm.html', form=form)
 
 @app.route('/booking/bookingForm')
+@login_required
 def booking_view():
     return render_template('booking/bookingForm.html')
 
