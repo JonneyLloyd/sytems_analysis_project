@@ -1,18 +1,17 @@
 {% extends "layout.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 {% block container %}
-{{ fm.csrf_token }}
 
 <h1>Welcome
     <span style="color: blue" id="name">
-        {{fm.getBookingOb()[0].user.details.first_name}} {{fm.getBookingOb()[0].user.details.last_name}}
+        {{user.first_name}} {{user.last_name}}
     </span>to our HOTEL
 </h1>
 <label>Booking Records</label>
 <hr>
 
 <table cellpadding="2">
-    {% for s in fm.getBookingOb() %}
+    {% for s in bookings %}
     <tr>
         <td><b>Full name:</b> {{s.user.details.first_name}} {{s.user.details.last_name}}</td>
         <td><b>Room Type:</b> {{s.room.room_price.type}}</td>
