@@ -22,7 +22,7 @@
         <td><b>End Date:</b> {{s.end_date}}</td>
         {% if s.room.availability == 'Y' %}
             <td>
-                <form method="POST" action="surecheckin">
+                <form method="POST" action="checkin">
                      <input class="btn btn-primary" type="submit" value="submit">
                      <input name="r_num" type="hidden" value="{{ s.room.number }}">
                 </form>

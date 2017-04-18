@@ -8,7 +8,7 @@
     {% from "macros/flash.html" import render_flashed_messages %}
         {{ render_flashed_messages() }}
         <form method="POST" action="/checkin_and_out/checkinform">
-             {{  fm.csrf_token }}
+             {{ fm.csrf_token }}
              {{ wtf.form_field(fm.first_name) }}
              {{ wtf.form_field(fm.last_name) }}
              {{ wtf.form_field(fm.credit_num) }}
