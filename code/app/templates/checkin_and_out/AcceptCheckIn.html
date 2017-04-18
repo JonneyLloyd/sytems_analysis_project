@@ -3,7 +3,11 @@
 {% block container %}
 {{ fm.csrf_token }}
 
-<h1>Welcome <p style="color: brown" id="first"><p style="color: blue" id="last">{{fm.getBookingOb()[0].user.details.first_name}} {{fm.getBookingOb()[0].user.details.last_name}}</p>to our HOTEL</h1>
+<h1>Welcome
+    <span style="color: blue" id="name">
+        {{fm.getBookingOb()[0].user.details.first_name}} {{fm.getBookingOb()[0].user.details.last_name}}
+    </span>to our HOTEL
+</h1>
 <label>Booking Records</label>
 <hr>
 
@@ -17,18 +21,16 @@
     <tr>
         <td><b>Start Date:</b> {{s.start_date}}</td>
         <td><b>End Date:</b> {{s.end_date}}</td>
-    <!--    <td><a href="{{ request.path + '?checkin_id=14262' }}">Check In</a></td>-->
-    {% if s.room.availability == 'Y' %}
-        <td>
-    <form method="POST" action="surecheckin">
-
-         <input class="btn btn-primary" type="submit" value="submit">
-         <input name="r_num" type="hidden" value="{{ s.room.number }}">
-    </form>
-        </td>
-    {% else %}
-        <td><b>Checked In</b></td>
-    {% endif %}
+        {% if s.room.availability == 'Y' %}
+            <td>
+                <form method="POST" action="surecheckin">
+                     <input class="btn btn-primary" type="submit" value="submit">
+                     <input name="r_num" type="hidden" value="{{ s.room.number }}">
+                </form>
+            </td>
+        {% else %}
+            <td><b>Checked In</b></td>
+        {% endif %}
     </tr>
     {% endfor %}
 </table>

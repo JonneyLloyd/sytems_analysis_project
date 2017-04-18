@@ -6,10 +6,10 @@ class BookingView(object):
 
     @staticmethod
     def get_booking_for_user(user_id):
-    	booking = Booking.query.filter_by(user_id=user_id).first()
+        booking = Booking.query.filter_by(user_id=user_id).first()
         if not booking:
-    		return False
-    	result = {
+            return False
+        result = {
             'room_id': booking.room_id,
             'start_date': booking.start_date,
             'end_date': booking.end_date,
@@ -17,14 +17,14 @@ class BookingView(object):
             'first_name':booking.user.details.first_name,
             'last_name':booking.user.details.last_name
         }
-    	return result
+        return result
 
     @staticmethod
     def get_booking_by_credit_card(credit_card):
-    	booking = Booking.query.filter_by(credit_card=credit_card).first()
+        booking = Booking.query.filter_by(credit_card=credit_card).first()
         if not booking:
-    		return False
-    	result = {
+            return False
+        result = {
             'room_id': booking.room_id,
             'start_date': booking.start_date,
             'end_date': booking.end_date,
@@ -32,7 +32,7 @@ class BookingView(object):
             'first_name':booking.user.details.first_name,
             'last_name':booking.user.details.last_name
         }
-    	return result
+        return result
 
     @staticmethod
     def get_booking_on_date(date):
@@ -51,7 +51,7 @@ class BookingView(object):
                 'last_name':booking.user.details.last_name
             }
             result.append(info)
-    	return result
+        return result
 
     @staticmethod
     def get_booking_between_dates(start_date, end_date):
@@ -59,7 +59,7 @@ class BookingView(object):
         bookings = Booking.query.filter(Booking.start_date >= datetime.strptime(start_date, '%Y-%m-%d').date(),
                                         Booking.start_date <= datetime.strptime(end_date, '%Y-%m-%d').date()).all()
         if not bookings:
-    		return False
+            return False
         for booking in bookings:
             info = {
                 'room_id': booking.room_id,
@@ -70,7 +70,7 @@ class BookingView(object):
                 'last_name':booking.user.details.last_name
             }
             result.append(info)
-    	return result
+        return result
     '''
     TODO will need to impliment a daily price table
     to make this and forecasting more accurate
@@ -80,7 +80,7 @@ class BookingView(object):
         bookings = Booking.query.filter(Booking.start_date >= datetime.strptime(start_date, '%Y-%m-%d').date(),
                                         Booking.start_date <= datetime.strptime(end_date, '%Y-%m-%d').date()).all()
         if not bookings:
-    		return False
+            return False
         result = []
         total = 0.0;
         for booking in bookings:
@@ -95,4 +95,4 @@ class BookingView(object):
             total = total + booking.booking_price
         total_ret = {'total': total}
         result.append(total_ret)
-    	return result
+        return result

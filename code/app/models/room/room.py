@@ -28,6 +28,10 @@ class Room(db.Model):
     def type(self):
         return self._type
 
+    @hybrid_property
+    def id(self):
+        return self._id
+
     @type.setter
     def type(self, value):
         self._type = value

@@ -7,7 +7,7 @@ from app.models.booking import Booking
 from app.models.room import Room
 class CheckOutManager(object):
     @staticmethod
-    def Judge(creditnum):
+    def check_out(creditnum):
         room_db = db.session.query(Room).filter(Booking.credit_card == creditnum, Booking.room_id == Room.id)
         if room_db.first() is None:
             return False

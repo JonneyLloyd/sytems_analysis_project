@@ -1,19 +1,11 @@
-from app.extensions import db;
-from app.models.booking import Booking
-from app.models.user.user_details import UserDetails
-from app.models.user import User
-from app.models.room import Room
-from app.models.room.room_price import RoomPrice
-from app.models.role.role import Role
-from flask import session
-from sqlalchemy.ext.hybrid import hybrid_property
-from flask import request,render_template
 from flask_wtf import FlaskForm as Form
 from wtforms import StringField,SubmitField,IntegerField
 from wtforms.validators import InputRequired
 from app.api.CheckIn_and_Out.CheckInManager import CheckInManager
 from app.api.CheckIn_and_Out.CheckOutManager import CheckOutManager
-class CheckIn(Form):
+
+
+class CheckInForm(Form):
     def _init_(self):
         self._lis=[];
     def setlis(self,lis):
@@ -30,7 +22,9 @@ class CheckIn(Form):
         return self._lis
     def chu(self):
         print("I was clicked!");
-class CheckOut(Form):
+
+
+class CheckOutForm(Form):
     credit_num = StringField('CreditNum', validators=[InputRequired()])
     def Judge(self,credit_num):
-        return CheckOutManager.Judge(credit_num);
+        return CheckOutManager.check_out(credit_num);
