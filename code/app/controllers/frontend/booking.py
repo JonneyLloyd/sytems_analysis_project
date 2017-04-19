@@ -5,11 +5,10 @@ from app.api.booking_view import BookingView
 from app.api.room_manager import RoomManager
 from app.forms.booking import BookingForm
 from flask import render_template, redirect, url_for, request, session
-
 from app.api.booking_manager import cancelBooking, makeBooking
-
 from app.api.booking_manager import cancelBooking, makeBooking , changePrice
-
+from app.auth.login import login_required
+from app.auth.access import user_is, user_can
 
 @app.route('/booking/booking', methods=['GET', 'POST'])
 def booking():
@@ -75,6 +74,7 @@ def cancel_booking():
 
 
 @app.route('/booking/changepriceform', methods=['GET', 'POST'])
+@user_is('ADMIN')
 def change_price_form():
     return render_template('booking/changeprice.html')
 
