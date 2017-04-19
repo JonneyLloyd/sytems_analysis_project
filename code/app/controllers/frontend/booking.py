@@ -89,5 +89,3 @@ def change_price():
     user_id = g.user.id
     changePrice.pricechange(user_id, room_id, weekday_price, weekend_price)
     return render_template('booking/priceChanged.html')
-
-
