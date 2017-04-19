@@ -7,7 +7,9 @@ from app.forms.booking import BookingForm
 from flask import render_template, redirect, url_for, request, session
 from app.api.booking_manager import cancelBooking, makeBooking
 from app.api.booking_manager import cancelBooking, makeBooking , changePrice
+
 from app.auth.login import login_required
+
 from app.auth.access import user_is, user_can
 
 @app.route('/booking/booking', methods=['GET', 'POST'])
