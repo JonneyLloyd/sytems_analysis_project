@@ -76,11 +76,21 @@ class makeBooking(object):
                 start_day = day_booked.weekday()
 
                 # is it a weekday?
-                if (start_day < 5):
+                date = date_list[i]
+                print(date)
+                booking = RoomStatus.query.filter(RoomStatus.date == date,
+                                                  RoomStatus.type == room_type).first()
+
+                print(booking.qty)
+                if (start_day < 5 and booking.qty >=19):
                     total_price += weekday_price
+                elif(start_day < 5 and booking.qty <19):
+                    total_price += weekday_price*2
                 # if not, is weekend
-                else:
+                elif(start_day > 5 and booking.qty >=19):
                     total_price += weekend_price
+                else:
+                    total_price += weekend_price*2
 
             room_booking = Booking(user_id, room_number, start_date, end_date, credit_card, total_price)
             db.session.add(room_booking)
