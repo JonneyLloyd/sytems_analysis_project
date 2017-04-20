@@ -14,8 +14,8 @@ class BookingView(object):
             'start_date': booking.start_date,
             'end_date': booking.end_date,
             'booking_price': booking.booking_price,
-            'first_name':booking.user.details.first_name,
-            'last_name':booking.user.details.last_name
+            'first_name': booking.user.details.first_name,
+            'last_name': booking.user.details.last_name
         }
         return result
 
@@ -29,8 +29,8 @@ class BookingView(object):
             'start_date': booking.start_date,
             'end_date': booking.end_date,
             'booking_price': booking.booking_price,
-            'first_name':booking.user.details.first_name,
-            'last_name':booking.user.details.last_name
+            'first_name': booking.user.details.first_name,
+            'last_name': booking.user.details.last_name
         }
         return result
 
@@ -40,15 +40,15 @@ class BookingView(object):
         bookings = Booking.query.filter(Booking.start_date <= datetime.strptime(date, '%Y-%m-%d').date(),
                                         Booking.end_date >= datetime.strptime(date, '%Y-%m-%d').date()).all()
         if not bookings:
-            return False;
+            return False
         for booking in bookings:
             info = {
                 'room_id': booking.room_id,
                 'start_date': booking.start_date,
                 'end_date': booking.end_date,
                 'booking_price': booking.booking_price,
-                'first_name':booking.user.details.first_name,
-                'last_name':booking.user.details.last_name
+                'first_name': booking.user.details.first_name,
+                'last_name': booking.user.details.last_name
             }
             result.append(info)
         return result
@@ -66,8 +66,8 @@ class BookingView(object):
                 'start_date': booking.start_date,
                 'end_date': booking.end_date,
                 'booking_price': booking.booking_price,
-                'first_name':booking.user.details.first_name,
-                'last_name':booking.user.details.last_name
+                'first_name': booking.user.details.first_name,
+                'last_name': booking.user.details.last_name
             }
             result.append(info)
         return result
@@ -88,8 +88,8 @@ class BookingView(object):
                 'room_id': booking.room_id,
                 'date': booking.start_date,
                 'booking_price': booking.booking_price,
-                'first_name':booking.user.details.first_name,
-                'last_name':booking.user.details.last_name
+                'first_name': booking.user.details.first_name,
+                'last_name': booking.user.details.last_name
             }
             result.append(info)
             total = total + booking.booking_price
