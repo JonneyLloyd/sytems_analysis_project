@@ -31,6 +31,7 @@ def booking_view():
 
 
 @app.route('/booking/booking', methods=['POST', 'GET'])
+@login_required
 def result():
     if request.method == 'POST':
         id = request.form['user_id']
@@ -40,16 +41,19 @@ def result():
 
 
 @app.route('/accounts/make-book-form', methods=['GET', 'POST'])
+@login_required
 def make_book_form():
     return render_template('booking/makebooking.html')
 
 
 @app.route('/booking/cancelbookform', methods=['GET', 'POST'])
+@login_required
 def cancel_booking_form():
     return render_template('booking/cancelBooking.html')
 
 
 @app.route('/accounts/makebooking', methods=['GET', 'POST'])
+@login_required
 def make_book():
     if request.method == 'POST':
         room_id = request.form['room_type']
@@ -68,6 +72,7 @@ def make_book():
 
 
 @app.route('/accounts/cancelbook', methods=['GET', 'POST'])
+@login_required
 def cancel_booking():
     credit_card = request.form['credit_card']
     booked_room_number = request.form['booked_room_number']

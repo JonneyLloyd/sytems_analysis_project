@@ -3,8 +3,10 @@
 
     <form action="/accounts/makebooking" method="POST">
       <input type="text" name="room_type" placeholder="room_type">
-      <input type="text" name="start_date" placeholder="start_date">
-      <input type="text" name="end_date" placeholder="end_date">
+{#      <input type="text" name="start_date" placeholder="start_date">#}
+        <label for="meeting">Start Date : </label><input name="start_date" type="date" value="2017-04-25"/>
+        <label for="meeting">End Date : </label><input name="end_date" type="date" value="2017-04-26"/>
+{#      <input type="text" name="end_date" placeholder="end_date">#}
       <input type="text" name="credit_card" placeholder="credit_card">
 
 

@@ -19,6 +19,8 @@ class makeBooking(object):
         date_start = datetime.datetime.strptime(new_start, '%Y%m%d').date()
         date_end = datetime.datetime.strptime(new_end, '%Y%m%d').date()
 
+
+
         distance = date_end - date_start
         distance = distance.days
 
@@ -34,8 +36,7 @@ class makeBooking(object):
 
 
         # Get total price of room
-
-        room_wanted = (RoomPrice.query.filter_by(_type=room_type).first())
+        room_wanted = (RoomPrice.query.filter_by(_id=room_type).first())
         room_number_object = (Room.query.filter_by(_type=room_type).all())
         room_found = False
         # room_bookings = (Booking.query.filter_by(_room_id=room_number_object._number).all())
@@ -62,6 +63,8 @@ class makeBooking(object):
                             break
                 else:
                     room_to_book = (Room.query.filter_by(_number=room_number).first())
+            else:
+                room_to_book = (Room.query.filter_by(_number=room_number).first())
 
         try:
             room_number = room_to_book._number
