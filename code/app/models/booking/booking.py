@@ -27,7 +27,12 @@ class Booking(db.Model):
         self._end_date = end_date
         self._credit_card = credit_card
         self._booking_price = booking_price
-
+    @hybrid_property
+    def user(self):
+        return self._user
+    @hybrid_property
+    def room(self):
+        return self._room
     @hybrid_property
     def id(self):
         return self._id
