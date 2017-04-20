@@ -81,6 +81,7 @@ class makeBooking(object):
                 booking = RoomStatus.query.filter(RoomStatus.date == date,
                                                   RoomStatus.type == room_type).first()
 
+
                 print(booking.qty)
                 if (start_day < 5 and booking.qty >=19):
                     total_price += weekday_price
