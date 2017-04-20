@@ -6949,7 +6949,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Change Room Price",
+											"text": "Checkin Manager",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -10399,7 +10399,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFafEJ4xkMI4ew="
 							},
-							"name": "Change Room Price",
+							"name": "Checkin Manager",
 							"visibility": "public"
 						},
 						{
