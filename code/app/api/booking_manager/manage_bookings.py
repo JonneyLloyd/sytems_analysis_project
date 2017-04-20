@@ -46,8 +46,8 @@ class makeBooking(object):
 
             room_bookings = (Booking.query.filter_by(_room_id=room_number).all())
 
-            if (room_found != True):
-                if (room_bookings != []):
+            if (room_found != True and room_bookings != []):
+
                     for room_date in room_bookings:
 
                         room_date_start = room_date._start_date
@@ -61,8 +61,7 @@ class makeBooking(object):
                             room_to_book = room_available
                             room_found = True
                             break
-                else:
-                    room_to_book = (Room.query.filter_by(_number=room_number).first())
+
             else:
                 room_to_book = (Room.query.filter_by(_number=room_number).first())
 
