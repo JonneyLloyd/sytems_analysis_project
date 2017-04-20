@@ -6,7 +6,7 @@ from app.api.room_manager import RoomManager
 from app.forms.booking import BookingForm
 from flask import render_template, redirect, url_for, request, session
 from app.api.booking_manager import cancelBooking, makeBooking
-from app.api.booking_manager import cancelBooking, makeBooking , changePrice
+
 
 from app.auth.login import LoginManager,login_required
 
@@ -98,5 +98,5 @@ def change_price():
         weekend_price = request.form['weekend_price']
 
     user_id = g.user.id
-    changePrice.pricechange(user_id, room_id, weekday_price, weekend_price)
+    RoomManager.pricechange(user_id, room_id, weekday_price, weekend_price)
     return render_template('booking/priceChanged.html')
