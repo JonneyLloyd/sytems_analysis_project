@@ -53,17 +53,14 @@ def make_book_form():
 def cancel_booking_form():
     user_id = g.user.id
     customer_bookings = Booking.query.filter_by(user_id = user_id).all()
-    print(customer_bookings)
 
     bookings_start = []
     bookings_room = []
-    bookings_price = []
-    bookings_card = []
+
     for book in customer_bookings:
         bookings_start.append(book.start_date)
         bookings_room.append(book.room_id)
-        bookings_price.append(book.booking_price)
-        bookings_card.append(book.credit_card)
+
 
     return render_template('booking/cancelBooking.html', bookings = bookings_start,bookings2 =bookings_room )
 
@@ -93,7 +90,7 @@ def cancel_booking():
     credit_card = request.form['credit_card']
     booked_room_number = request.form['booked_room_number']
     booked_start_date = request.form['booked_start_date']
-    print(booked_start_date)
+
     user_id = g.user.id
     canceled = cancelBooking.bookingcancel(user_id,credit_card, booked_room_number, booked_start_date)
     if (canceled):
