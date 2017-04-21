@@ -43,7 +43,7 @@ def result():
 @login_required
 def make_book_form():
 
-    room_list = get_existing_rooms()
+    room_list = makeBooking.get_existing_rooms()
 
     return render_template('booking/makebooking.html', room_list = room_list)
 
@@ -102,8 +102,7 @@ def cancel_booking():
 @app.route('/booking/changepriceform', methods=['GET', 'POST'])
 @user_is('ADMIN')
 def change_price_form():
-
-    room_list = get_existing_rooms()
+    room_list = makeBooking.get_existing_rooms()
 
     return render_template('booking/changeprice.html', room_list=room_list)
 
@@ -114,21 +113,7 @@ def change_price():
         room_id = request.form['room_id']
         weekday_price = request.form['weekday_price']
         weekend_price = request.form['weekend_price']
+        RoomManager.pricechange(room_id,weekday_price,weekend_price)
 
     return render_template('booking/priceChanged.html')
 
-
-def get_existing_rooms():
-
-    room_list =[]
-    room_list2 =[]
-
-    for value in db.session.query(Room.type).distinct():
-        room_list.append(value)
-
-    for room_value in room_list:
-        name = RoomPrice.query.filter_by(id=room_value[0]).first()
-        name2 = name.type
-        room_list2.append(name2)
-
-    return room_list2

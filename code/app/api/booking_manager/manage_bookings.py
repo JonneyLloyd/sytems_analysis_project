@@ -93,6 +93,15 @@ class makeBooking(object):
 
             return False
 
+    def get_existing_rooms():
+
+        room_list2 = []
+
+        for value in db.session.query(Room.type).distinct():
+            name = RoomPrice.query.filter_by(id=value[0]).first()
+            room_list2.append(name)
+
+        return room_list2
 
 class cancelBooking(object):
     @staticmethod

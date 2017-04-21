@@ -6,7 +6,7 @@
         <label>Select Room Type :</label>
         <select name="room_id" width="300px">
             {% for x in room_list %}
-                <option value="{{ loop.index }}" SELECTED>{{ x }}</option>
+                <option value="{{ x.id  }}" SELECTED>{{ x.type }}</option>
             {% endfor %}
         </select>
         <input type="text" name="weekday_price" placeholder="weekday_price">

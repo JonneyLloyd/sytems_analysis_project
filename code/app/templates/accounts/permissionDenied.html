@@ -2,11 +2,23 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block title_page %}
-  Login
+    Login
 {% endblock %}
 
 {% block container %}
-  <div class="container">
-<p>Permission Denied.Please  <a href="/accounts/login"> log in. </a></p>
-  </div>
+    {% if error ==1 %}
+        <div class="container">
+            <p>Unauthorised access.Please <a href="{{ url_for('login') }}">Log In</a></p>
+        </div>
+    {% endif %}
+    {% if error ==2 %}
+        <div class="container">
+            <p>Permission Denied.Please <a href="{{ url_for('login') }}">Log In</a></p>
+        </div>
+    {% endif %}
+    {% if error ==3 %}
+        <div class="container">
+            <p>Page does not exist. <a href="{{ url_for('home') }}">Go Home</a></p>
+        </div>
+    {% endif %}
 {% endblock %}
