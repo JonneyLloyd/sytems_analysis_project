@@ -7,14 +7,15 @@ from app.auth.access import UserIsNotPermitted
 
 @app.errorhandler(UserIsNotAuthorized)
 def user_not_authorised(error):
-    return render_template('layout.html', text='Unauthorised access. Please log in.'), 403
+    return render_template('accounts/permissionDenied.html'), 403
+# <a href="/booking/cancelbookform"> Try Again? </a>
 
 
 @app.errorhandler(UserIsNotPermitted)
 def user_not_permitted(error):
-    return render_template('layout.html', text='Permission denied.'), 403
+    return render_template('accounts/permissionDenied.html'), 403
 
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return render_template('layout.html', text='This page does not exist'), 404
+    return render_template('accounts/noPage.html'), 404

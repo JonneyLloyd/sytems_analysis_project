@@ -1,15 +1,14 @@
 from flask import g, render_template, redirect, url_for, request, session, flash
 from flask import current_app as app
-
+from app.extensions import db
 from app.api.booking_view import BookingView
 from app.api.room_manager import RoomManager
 from app.forms.booking import BookingForm
 from flask import render_template, redirect, url_for, request, session
 from app.api.booking_manager import cancelBooking, makeBooking
-
-
+from app.models.room import Room,RoomPrice
+from app.models.booking import Booking
 from app.auth.login import LoginManager,login_required
-
 from app.auth.access import user_is, user_can
 
 @app.route('/booking/booking', methods=['GET', 'POST'])
@@ -43,13 +42,30 @@ def result():
 @app.route('/accounts/make-book-form', methods=['GET', 'POST'])
 @login_required
 def make_book_form():
-    return render_template('booking/makebooking.html')
+
+    room_list = get_existing_rooms()
+
+    return render_template('booking/makebooking.html', room_list = room_list)
 
 
 @app.route('/booking/cancelbookform', methods=['GET', 'POST'])
 @login_required
 def cancel_booking_form():
-    return render_template('booking/cancelBooking.html')
+    user_id = g.user.id
+    customer_bookings = Booking.query.filter_by(user_id = user_id).all()
+    print(customer_bookings)
+
+    bookings_start = []
+    bookings_room = []
+    bookings_price = []
+    bookings_card = []
+    for book in customer_bookings:
+        bookings_start.append(book.start_date)
+        bookings_room.append(book.room_id)
+        bookings_price.append(book.booking_price)
+        bookings_card.append(book.credit_card)
+
+    return render_template('booking/cancelBooking.html', bookings = bookings_start,bookings2 =bookings_room )
 
 
 @app.route('/accounts/makebooking', methods=['GET', 'POST'])
@@ -77,7 +93,9 @@ def cancel_booking():
     credit_card = request.form['credit_card']
     booked_room_number = request.form['booked_room_number']
     booked_start_date = request.form['booked_start_date']
-    canceled = cancelBooking.bookingcancel(credit_card, booked_room_number, booked_start_date)
+    print(booked_start_date)
+    user_id = g.user.id
+    canceled = cancelBooking.bookingcancel(user_id,credit_card, booked_room_number, booked_start_date)
     if (canceled):
         return render_template('booking/roomCanceled.html')
     else:
@@ -87,7 +105,10 @@ def cancel_booking():
 @app.route('/booking/changepriceform', methods=['GET', 'POST'])
 @user_is('ADMIN')
 def change_price_form():
-    return render_template('booking/changeprice.html')
+
+    room_list = get_existing_rooms()
+
+    return render_template('booking/changeprice.html', room_list=room_list)
 
 
 @app.route('/accounts/changeprice', methods=['GET', 'POST'])
@@ -97,6 +118,20 @@ def change_price():
         weekday_price = request.form['weekday_price']
         weekend_price = request.form['weekend_price']
 
-    user_id = g.user.id
-    RoomManager.pricechange(user_id, room_id, weekday_price, weekend_price)
     return render_template('booking/priceChanged.html')
+
+
+def get_existing_rooms():
+
+    room_list =[]
+    room_list2 =[]
+
+    for value in db.session.query(Room.type).distinct():
+        room_list.append(value)
+
+    for room_value in room_list:
+        name = RoomPrice.query.filter_by(id=room_value[0]).first()
+        name2 = name.type
+        room_list2.append(name2)
+
+    return room_list2
