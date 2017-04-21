@@ -24,7 +24,7 @@
                         | Description of business scenario                  | Oliver      |  4
                         |                                                   |             |
 **4 Software Lifecycle**|                                                   |             |
-                        | Discuss & justify SLC & risk management strategy  | TBD         |  TBD
+                        | Discuss & justify SLC & risk management strategy  | Patrick     |  12
                         |                                                   |             |
 **5 Project Plan**      |                                                   |             |
                         | Plan specifying timeline, deliverables, roles     | Oliver      |  4
@@ -40,8 +40,8 @@
                         |                                                   |             |
 **7 System Architecture**|                                                  |             |  **5**
                         | Diagram with interfaces                           | Oliver      |  5
-                        | Two page discussion, detail architectural decisions | Oli/Jon/ALL |  5/6
-                        | Discuss UML workbench used                        | TBD         |  6?
+                        | Two page discussion, detail architectural decisions | Oliver    |  5/6
+                        | Discuss UML workbench used                        | Oliver      |  6
                         |                                                   |             |
 **8 Analysis**          |                                                   |             |  **5/6**
                         | Identify candidate classes                        | Patrick     |  5
@@ -50,34 +50,27 @@
                         | Entity relationship diagram                       | Jonathan    |  6
                         |                                                   |             |
 **9 Code 1**            |                                                   |             |  **6**
-                        | TBD                                               |             |
-                        |                                                   |             |
 **9 Code 2**            |                                                   |             |  **7**
-                        | TBD                                               |             |
-                        |                                                   |             |
-**9 Code 2**            |                                                   |             |  **8**
-                        | TBD                                               |             |
-                        |                                                   |             |
+**9 Code 3**            |                                                   |             |  **8**
 **10 Code 4 Added Value**|                                                  |             |  **9**
-                        | TBD                                               |             |
                         |                                                   |             |
-**11 Stats Table**      |                                                   |             |
-                        | Classes with authors/lines of code                |             |
+**11 Stats Table**      |                                                   |             |  **12**
+                        | Classes with authors/lines of code                | Oliver      |
                         | Total lines of code a) for whole app b) per member|             |
                         |                                                   |             |
                         |                                                   |             |
-**12 Design/Architecture Recovery** |                                       | Yifei       |  **10**
-                        | Design time class diagram                         |             |
-                        | Package Diagram                                   |             |
-                        | State Chart                                       |             |
-                        | Specify concepts for future releases              |   TBD       |
+**12 Design/Architecture Recovery** |                                       |             |  **12**
+                        | Design time class diagram                         | Jonathan    |
+                        | Package Diagram                                   | Jonathan    |
+                        | State Chart                                       | Yifei       |
+                        | Specify concepts for future releases              | Yifei       |
                         |                                                   |             |
 **13 More Doc**         |                                                   |             |
-                        | Description of added value                        |   TBD       |  **11**
-                        | Patterns used                                     |   TBD       |
+                        | Description of added value                        | Oliver      |  **12**
+                        | Patterns used                                     | Oliver      |
                         |                                                   |             |
-**14 Critique**         |                                                   |             |  **11**
-                        | Evaluate analysis & design artefacts              |   TBD       |
+**14 Critique**         |                                                   |             |  **12**
+                        | Evaluate analysis & design artefacts              | Patrick     |
                         |                                                   |             |
 **15 References**       |                                                   |   ALL       |
                         |                                                   |             |
