@@ -46,3 +46,18 @@ class UserManager(object):
         user.details.contact_number = contact_number
         db.session.add(user)
         db.session.commit()
+
+    @staticmethod
+    def create_staff(email, password, role):
+        if User.query.filter_by(email=email).first():
+            return False
+        if role =='1':
+            role = RoleEnum.GUEST
+        elif role =='2':
+            role = RoleEnum.ADMIN
+        user = User(email)
+        user.password = password
+        user.role = RoleFactory.get_role(role)
+        db.session.add(user)
+        db.session.commit()
+        return True

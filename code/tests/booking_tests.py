@@ -43,7 +43,7 @@ class TestBookingView:
 
             UserManager.create_user("asd@asd.asd", "asdasd")
             user = UserManager.get_user("asd@asd.asd")
-            UserManager.update_details(user, "mr", "test", 05644654)
+            UserManager.update_details(user, "mr", "test", '05644654')
 
             db.session.add(roomPrice)
             db.session.add(room)

@@ -10,6 +10,7 @@ from app.models.room import Room,RoomPrice
 from app.models.booking import Booking
 from app.auth.login import LoginManager,login_required
 from app.auth.access import user_is, user_can
+import datetime
 
 @app.route('/booking/booking', methods=['GET', 'POST'])
 @login_required
@@ -77,6 +78,8 @@ def make_book():
     user_id = g.user.id
     success = False
     if credit_card != "" and start_date != "" and end_date != "" and room_id != "":
+        # start_date = datetime.datetime(start_date)
+        # end_date = datetime.datetime(end_date)
         success = makeBooking.bookingmake(user_id, room_id, start_date, end_date, credit_card)
     if (success):
         return render_template('booking/bookingSuccess.html')

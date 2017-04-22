@@ -12,6 +12,10 @@ def navbar():
         View('Log out', 'logout'),
         View('Profile', 'profile'),
         Subgroup(
+            'Staff',
+            View('Add Staff', 'add_staff_form'),
+        ),
+        Subgroup(
             'Booking',
             View('Booking', 'make_book_form'),
             View('Cancel', 'cancel_booking_form'),

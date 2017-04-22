@@ -11,6 +11,8 @@ import datetime
 class makeBooking(object):
     @staticmethod
     def bookingmake(user_id, room_type, start_date, end_date, credit_card):
+        print("TEST IS ENTERING HERE")
+        print(type(start_date))
 
         new_start = start_date.replace('-', "")
         new_end = end_date.replace('-', "")
@@ -34,7 +36,6 @@ class makeBooking(object):
         room_wanted = (RoomPrice.query.filter_by(_id=room_type).first())
         room_number_object = (Room.query.filter_by(_type=room_type).all())
         room_found = False
-        # room_bookings = (Booking.query.filter_by(_room_id=room_number_object._number).all())
 
         for room_available in room_number_object:
             room_number = room_available._number
@@ -85,7 +86,13 @@ class makeBooking(object):
                 else:
                     total_price += weekend_price * 2
 
-            room_booking = Booking(user_id, room_number, start_date, end_date, credit_card, total_price)
+
+
+            start_dated = datetime.datetime.strptime(new_start, '%Y%m%d').date()
+            end_dated = datetime.datetime.strptime(new_end, '%Y%m%d').date()
+
+            room_booking = Booking(user_id, room_number, start_dated, end_dated, credit_card, total_price)
+
             db.session.add(room_booking)
             db.session.commit()
             return True
@@ -106,6 +113,7 @@ class makeBooking(object):
 class cancelBooking(object):
     @staticmethod
     def bookingcancel(user_id, credit_card, booked_room_number, booked_start_date):
+        booked_start_date = datetime.datetime.strptime(booked_start_date, '%Y%m%d').date()
         booking_instance = Booking.query.filter_by(user_id = user_id,credit_card=credit_card, _room_id=booked_room_number,
                                                    _start_date=booked_start_date).first()
 
@@ -126,6 +134,8 @@ class cancelBooking(object):
             for date_booked in date_list:
                 RoomManager.increase_availability_for_booking(date_booked, room_type)
 
+
+            print(booked_start_date)
             Booking.query.filter_by(user_id=user_id, credit_card=credit_card, _room_id=booked_room_number,
                                     _start_date=booked_start_date).delete()
             db.session.commit()

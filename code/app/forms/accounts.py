@@ -1,6 +1,6 @@
 from flask import flash
 from flask_wtf import FlaskForm as Form
-from wtforms import StringField, PasswordField, ValidationError, HiddenField
+from wtforms import StringField, PasswordField, ValidationError, HiddenField, SelectField
 from wtforms.validators import Required, Email, EqualTo, Length
 
 
@@ -23,3 +23,13 @@ class RegisterForm(Form):
 class LoginForm(Form):
     email = StringField('email', [Required(), Email()])
     password = PasswordField('password', [Required()])
+
+class RegisterFormStaff(Form):
+    email = StringField('Email', [Required(), Email()])  # TODO stricter validation
+    choices = [(1,1),(2,1)]
+    role = SelectField("Test: ", choices=choices)
+    password = PasswordField('Password', [Required()])
+    password_confirmation = PasswordField(
+        'Confirm Password',
+        [Required(), EqualTo('password', message='Passwords must be equal')]
+    )
