@@ -61,3 +61,10 @@ class UserManager(object):
         db.session.add(user)
         db.session.commit()
         return True
+
+    def remove_staff(email,id,role_id):
+        if not User.query.filter_by(email=email).first():
+            return False
+        delete_user = User.query.filter_by(email=email, id=id, _role_id=role_id).delete()
+        # db.session.add(delete_user)
+        db.session.commit()

@@ -78,8 +78,6 @@ def make_book():
     user_id = g.user.id
     success = False
     if credit_card != "" and start_date != "" and end_date != "" and room_id != "":
-        # start_date = datetime.datetime(start_date)
-        # end_date = datetime.datetime(end_date)
         success = makeBooking.bookingmake(user_id, room_id, start_date, end_date, credit_card)
     if (success):
         return render_template('booking/bookingSuccess.html')

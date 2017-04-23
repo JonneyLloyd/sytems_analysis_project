@@ -134,8 +134,6 @@ class cancelBooking(object):
             for date_booked in date_list:
                 RoomManager.increase_availability_for_booking(date_booked, room_type)
 
-
-            print(booked_start_date)
             Booking.query.filter_by(user_id=user_id, credit_card=credit_card, _room_id=booked_room_number,
                                     _start_date=booked_start_date).delete()
             db.session.commit()

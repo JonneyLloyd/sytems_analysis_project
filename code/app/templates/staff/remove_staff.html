@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block content %}
+
+      {%  if staff_list!= [] %}
+    <form action="/staff/remove_staff" method="POST">
+
+
+
+        <label>Select Role id:</label>
+
+        <select name="staff_role_id" width="300px">
+            {% for x in  staff_list %}
+
+                <option value="{{ x._role_id }}" SELECTED>{{ x._role_id }}</option>
+            {% endfor %}
+        </select>
+
+     <label>Select Staff id:</label>
+        <select name="staff_id" width="300px">
+            {% for x in  staff_list %}
+                <option value="{{ x.id }}" SELECTED>{{ x.id }}</option>
+
+            {% endfor %}
+
+        </select>
+
+     <label>Select Staff email:</label>
+        <select name="staff_email" width="300px">
+            {% for x in  staff_list %}
+
+                <option value="{{ x.email }}" SELECTED>{{ x.email }}</option>
+            {% endfor %}
+        </select>
+
+
+        <input type="submit" value="RemoveStaff">
+
+
+    </form>
+    {% endif %}
+
+    {%  if staff_list == [] %}
+    <div>
+    <p> No entries to delete</p>
+
+    </div>
+    {% endif %}
+{% endblock %}
