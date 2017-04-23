@@ -1,14 +1,20 @@
 from flask import g, render_template, redirect, url_for, request, session, flash
 from flask import current_app as app
 from app.extensions import db
+from app.api.booking_view import BookingView
 from app.api.user_manager import UserManager
+from app.forms.booking import BookingForm
 from flask import render_template, redirect, url_for, request, session
+from app.api.booking_manager import cancelBooking, makeBooking
+from app.models.room import Room,RoomPrice
 from app.models.user import User
+from app.auth.login import LoginManager,login_required
+from app.auth.access import user_is, user_can
 from app.forms.accounts import LoginForm, RegisterForm, ProfileForm, RegisterFormStaff
 import datetime
 
 @app.route('/staff/add_staff', methods=['GET', 'POST'])
-# @login_required
+@login_required
 def add_staff():
 
     if request.method == 'POST':
@@ -21,14 +27,14 @@ def add_staff():
 
 
 @app.route('/staff/add_staff_form', methods=['GET', 'POST'])
-# @login_required
+@login_required
 def add_staff_form():
     form = RegisterFormStaff()
 
     return render_template('staff/add_staff.html', form=form)
 
 @app.route('/staff/remove_staff', methods=['GET', 'POST'])
-# @login_required
+@login_required
 def remove_staff():
 
     if request.method == 'POST':
@@ -41,7 +47,7 @@ def remove_staff():
 
 
 @app.route('/staff/remove_staff_form', methods=['GET', 'POST'])
-# @login_required
+@login_required
 def remove_staff_form():
     this_user = g.user.id
     staff_list = User.query.filter(User._role_id !=1, User.id != this_user).all()
