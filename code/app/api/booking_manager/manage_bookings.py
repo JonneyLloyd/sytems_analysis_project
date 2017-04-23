@@ -11,8 +11,6 @@ import datetime
 class makeBooking(object):
     @staticmethod
     def bookingmake(user_id, room_type, start_date, end_date, credit_card):
-        print("TEST IS ENTERING HERE")
-        print(type(start_date))
 
         new_start = start_date.replace('-', "")
         new_end = end_date.replace('-', "")

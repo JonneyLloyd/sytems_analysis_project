@@ -8,19 +8,12 @@ Staff Updated
 {% endblock %}
 
 {% block container %}
-    {%   if page == 1 %}
-  <div class="container">
-    Staff Added <a href="/staff/add_staff_form"> add another? </a>
 
-  </div>
-    {%   endif %}
-    {%   if page == 2 %}
 
   <div class="container">
     Staff Removed <a href="{{ url_for('remove_staff_form') }}"> remove another? </a>
-{#  <a href="{{ url_for('add_staff_form') }}">Log In</a>#}
 
   </div>
-     {%   endif %}
+
 {% endblock %}
 

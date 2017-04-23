@@ -27,10 +27,14 @@ class LoginForm(Form):
 
 class RegisterFormStaff(Form):
     email = StringField('Email', [Required(), Email()])  # TODO stricter validation
-    choices = [('2',2)]
-    role = SelectField("Role: ", choices=choices)
+    choices = [('1','Guest'), ('2','Admin'),('3','Manger'),('4','Staff')]
+    role = SelectField("Role: ",coerce=str, choices=choices)
+    # role =StringField('Role', [Required()])  # TODO stricter validation
     password = PasswordField('Password', [Required()])
     password_confirmation = PasswordField(
         'Confirm Password',
         [Required(), EqualTo('password', message='Passwords must be equal')]
     )
+
+class DeleteFormStaff(Form):
+    email = StringField('Email', [Required(), Email()])  # TODO stricter validation

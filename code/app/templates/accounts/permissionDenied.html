@@ -6,19 +6,9 @@
 {% endblock %}
 
 {% block container %}
-    {% if error ==1 %}
-        <div class="container">
-            <p>Unauthorised access.Please <a href="{{ url_for('login') }}">Log In</a></p>
-        </div>
-    {% endif %}
-    {% if error ==2 %}
-        <div class="container">
-            <p>Permission Denied.Please <a href="{{ url_for('login') }}">Log In</a></p>
-        </div>
-    {% endif %}
-    {% if error ==3 %}
-        <div class="container">
-            <p>Page does not exist. <a href="{{ url_for('home') }}">Go Home</a></p>
-        </div>
-    {% endif %}
+
+    <div>
+    <p> {{ error }} <a href="{{ url_for('login') }}">Log In</a> or <a href="{{ url_for('home') }}">Go Home</a>
+    </div>
+
 {% endblock %}

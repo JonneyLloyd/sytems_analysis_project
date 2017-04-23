@@ -1,48 +1,18 @@
 {% extends "layout.html" %}
-{% block content %}
+{% import "bootstrap/wtf.html" as wtf %}
 
-      {%  if staff_list!= [] %}
-    <form action="/staff/remove_staff" method="POST">
+{% block title_page %}
+  Register
+{% endblock %}
 
-
-
-        <label>Select Role id:</label>
-
-        <select name="staff_role_id" width="300px">
-            {% for x in  staff_list %}
-
-                <option value="{{ x._role_id }}" SELECTED>{{ x._role_id }}</option>
-            {% endfor %}
-        </select>
-
-     <label>Select Staff id:</label>
-        <select name="staff_id" width="300px">
-            {% for x in  staff_list %}
-                <option value="{{ x.id }}" SELECTED>{{ x.id }}</option>
-
-            {% endfor %}
-
-        </select>
-
-     <label>Select Staff email:</label>
-        <select name="staff_email" width="300px">
-            {% for x in  staff_list %}
-
-                <option value="{{ x.email }}" SELECTED>{{ x.email }}</option>
-            {% endfor %}
-        </select>
-
-
-        <input type="submit" value="RemoveStaff">
-
-
+{% block container %}
+  <div class="container">
+    {% from "macros/flash.html" import render_flashed_messages %}
+    {{ render_flashed_messages() }}
+    <form class="" action="/staff/remove_staff_form" method="POST">
+        {{ form.csrf_token }}
+        {{ wtf.form_field(form.email) }}
+      <input class="btn btn-primary" type="submit" value="Delete">
     </form>
-    {% endif %}
-
-    {%  if staff_list == [] %}
-    <div>
-    <p> No entries to delete</p>
-
-    </div>
-    {% endif %}
+  </div>
 {% endblock %}

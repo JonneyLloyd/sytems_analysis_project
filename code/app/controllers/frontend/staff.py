@@ -10,7 +10,7 @@ from app.models.room import Room,RoomPrice
 from app.models.user import User
 from app.auth.login import LoginManager,login_required
 from app.auth.access import user_is, user_can
-from app.forms.accounts import LoginForm, RegisterForm, ProfileForm, RegisterFormStaff
+from app.forms.accounts import LoginForm, RegisterForm, ProfileForm, RegisterFormStaff,DeleteFormStaff
 import datetime
 
 @app.route('/staff/add_staff', methods=['GET', 'POST'])
@@ -26,28 +26,14 @@ def add_staff_form():
 
     return render_template('staff/add_staff.html', form=form)
 
-@app.route('/staff/remove_staff', methods=['GET', 'POST'])
-@login_required
-@user_is('ADMIN')
-def remove_staff():
-
-    if request.method == 'POST':
-        email = request.form['staff_email']
-        role = request.form['staff_role_id']
-        staff_id = request.form['staff_id']
-
-    UserManager.remove_staff(email, staff_id, role)
-
-
-    return render_template('staff/staff_updated.html', page=2)
-
 
 @app.route('/staff/remove_staff_form', methods=['GET', 'POST'])
 @login_required
 @user_is('ADMIN')
 def remove_staff_form():
-    this_user = g.user.id
-    staff_list = User.query.filter(User._role_id !=1, User.id != this_user).all()
 
-
-    return render_template('staff/remove_staff.html', staff_list = staff_list)
+    form = DeleteFormStaff()
+    if form.validate_on_submit():
+        UserManager.remove_staff(form.email.data)
+        flash(form.email.data + ' Has been added removed from users ')
+    return render_template('staff/remove_staff.html', form =form)
