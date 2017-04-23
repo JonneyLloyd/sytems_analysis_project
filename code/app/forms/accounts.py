@@ -2,6 +2,7 @@ from flask import flash
 from flask_wtf import FlaskForm as Form
 from wtforms import StringField, PasswordField, ValidationError, HiddenField, SelectField
 from wtforms.validators import Required, Email, EqualTo, Length
+from app.models.role import RoleEnum, RoleFactory
 
 
 class ProfileForm(Form):
@@ -26,8 +27,8 @@ class LoginForm(Form):
 
 class RegisterFormStaff(Form):
     email = StringField('Email', [Required(), Email()])  # TODO stricter validation
-    choices = [(1,1),(2,2)]
-    role = SelectField("Test: ", choices=choices)
+    choices = [(RoleEnum.GUEST,'Guest')]
+    role = SelectField("Role: ", choices=choices)
     password = PasswordField('Password', [Required()])
     password_confirmation = PasswordField(
         'Confirm Password',

@@ -21,7 +21,7 @@ def add_staff():
         email = request.form['email']
         role = request.form['role']
         password = request.form['password']
-
+    
     UserManager.create_staff(email,password,role)
     return render_template('staff/staff_updated.html',page=1)
 
@@ -43,6 +43,8 @@ def remove_staff():
         staff_id = request.form['staff_id']
 
     UserManager.remove_staff(email, staff_id, role)
+
+
     return render_template('staff/staff_updated.html', page=2)
 
 

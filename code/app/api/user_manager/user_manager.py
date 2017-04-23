@@ -51,10 +51,8 @@ class UserManager(object):
     def create_staff(email, password, role):
         if User.query.filter_by(email=email).first():
             return False
-        if role =='1':
-            role = RoleEnum.GUEST
-        elif role =='2':
-            role = RoleEnum.ADMIN
+        print(role)
+        print(type(role))
         user = User(email)
         user.password = password
         user.role = RoleFactory.get_role(role)
@@ -66,5 +64,5 @@ class UserManager(object):
         if not User.query.filter_by(email=email).first():
             return False
         delete_user = User.query.filter_by(email=email, id=id, _role_id=role_id).delete()
-        # db.session.add(delete_user)
         db.session.commit()
+        return True
