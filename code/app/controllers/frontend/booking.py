@@ -55,15 +55,12 @@ def cancel_booking_form():
     user_id = g.user.id
     customer_bookings = Booking.query.filter_by(user_id = user_id).all()
 
-    bookings_start = []
-    bookings_room = []
-
-    for book in customer_bookings:
-        bookings_start.append(book.start_date)
-        bookings_room.append(book.room_id)
+    bookings_start = [book.start_date for book in customer_bookings]
+    bookings_room = [book.room_id for book in customer_bookings]
 
 
-    return render_template('booking/cancelBooking.html', bookings = bookings_start,bookings2 =bookings_room )
+
+    return render_template('booking/cancelBooking.html', bookings_start = bookings_start,bookings_room =bookings_room )
 
 
 @app.route('/accounts/makebooking', methods=['GET', 'POST'])

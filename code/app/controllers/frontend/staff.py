@@ -11,9 +11,8 @@ from app.models.user import User
 from app.auth.login import LoginManager,login_required
 from app.auth.access import user_is, user_can
 from app.forms.accounts import LoginForm, RegisterForm, ProfileForm, RegisterFormStaff,DeleteFormStaff
+from app.models.role import RoleEnum, RoleFactory
 import datetime
-
-@app.route('/staff/add_staff', methods=['GET', 'POST'])
 
 @app.route('/staff/add_staff_form', methods=['GET', 'POST'])
 @login_required
@@ -21,7 +20,9 @@ import datetime
 def add_staff_form():
     form = RegisterFormStaff()
     if form.validate_on_submit():
-        UserManager.create_staff(form.email.data, form.password.data, form.role.data)
+        role = int(form.role.data)
+        role = list(RoleEnum)[role]
+        UserManager.create_user(form.email.data, form.password.data,role)
         flash(form.email.data + ' Has been added to users with role: ' + form.role.data)
 
     return render_template('staff/add_staff.html', form=form)

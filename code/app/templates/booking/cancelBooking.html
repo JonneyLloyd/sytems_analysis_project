@@ -7,7 +7,7 @@
         <label>Select Room Number:</label>
 
         <select name="booked_room_number" width="300px">
-            {% for x in  bookings2 %}
+            {% for x in  bookings_room %}
                 <option value="{{ x }}" SELECTED>{{ x }}</option>
             {% endfor %}
 
@@ -15,7 +15,7 @@
 
         <label>Select Start Date:</label>
         <select name="booked_start_date" width="300px">
-            {% for x in  bookings %}
+            {% for x in  bookings_start %}
                 <option value="{{ x }}" SELECTED>{{ x }}</option>
             {% endfor %}
 
