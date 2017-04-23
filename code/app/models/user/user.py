@@ -21,7 +21,6 @@ class User(db.Model):
 
     _role = db.relationship('Role')
     _details = db.relationship('UserDetails')
-
     def __init__(self, email, password=None, role=None, details=None):
         self._email = email
         if password is not None:

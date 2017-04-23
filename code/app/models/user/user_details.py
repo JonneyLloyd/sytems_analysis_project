@@ -18,7 +18,9 @@ class UserDetails(db.Model):
         self._first_name = first_name
         self._last_name = last_name
         self._contact_number = contact_number
-
+    @hybrid_property
+    def id(self):
+        return self._id
     @hybrid_property
     def first_name(self):
         return self._first_name
