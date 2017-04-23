@@ -1,10 +1,8 @@
 from app.app_factory import AppFactory
 from app.extensions import db
 from config import TestConfig
-
-
+from test import BaseDatabaseTest
 from datetime import datetime
-
 from app.api.booking_view import BookingView
 from app.api.room_manager import RoomManager
 from app.api.user_manager import UserManager
@@ -20,32 +18,12 @@ from app.api.utils import Observer
 from app.api.utils import ObserverTest
 
 
-class TestBookingManger:
+class TestBookingManger(BaseDatabaseTest):
     @classmethod
     def setup_class(cls):
-        cls.app = AppFactory.create_app(TestConfig)
-        # db.init_app(cls.app)
+        super(TestBookingManger, cls).setup_class()
 
-        with cls.app.app_context():
-            db.create_all()
-            roomPrice = RoomPrice("single", 100, 150)
-            room = Room(1, 101, 3, "Available", 1)
-            # booking = Booking(1, 1, datetime.datetime.strptime('2017-01-02', '%Y-%m-%d').date()
-            # ,datetime.datetime.strptime('2017-01-10', '%Y-%m-%d').date(), 123123123, 2000)
-            booking = Booking(1, 101, datetime.datetime.strptime('2017-01-02', '%Y-%m-%d').date()
-                              , datetime.datetime.strptime('2017-01-10', '%Y-%m-%d').date(), 123123123, 2000)
-            RoomManager.set_availability_for_booking(datetime.datetime.strptime("2017-01-01", '%Y-%m-%d').date(), 1)
-
-            UserManager.create_user("asd@asd.asd", "asdasd")
-            user = UserManager.get_user("asd@asd.asd")
-            UserManager.update_details(user, "mr", "test", '05644654')
-
-            db.session.add(roomPrice)
-            db.session.add(room)
-            db.session.add(booking)
-            db.session.commit()
-
-        print ("Starting booking view tests")
+        print ("Starting booking manager tests")
 
     @classmethod
     def teardown_class(cls):
@@ -63,6 +41,12 @@ class TestBookingManger:
         with self.app.app_context():
             result = makeBooking.bookingmake(1, 1, '2017-07-24', '2017-07-25', 1234)
             assert result != False
+            result = Booking.query.filter_by(user_id=1, credit_card=1234, _room_id=1,
+                                    _start_date='2017-07-24')
+            if result:
+                assert result !=False
+            else:
+                assert result == False
 
 
     def pricechange_test(self):
@@ -72,9 +56,9 @@ class TestBookingManger:
 
     def bookingcancel_test(self):
         with self.app.app_context():
+            cancelBooking.bookingcancel(1, 123123123, 101, '20170102')
 
-            result = cancelBooking.bookingcancel(1, 123123123, 101, '20170102')
-            assert result != False
+
 
 
 

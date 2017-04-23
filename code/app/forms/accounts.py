@@ -27,7 +27,7 @@ class LoginForm(Form):
 
 class RegisterFormStaff(Form):
     email = StringField('Email', [Required(), Email()])  # TODO stricter validation
-    choices = [(RoleEnum.GUEST,'Guest')]
+    choices = [('2',2)]
     role = SelectField("Role: ", choices=choices)
     password = PasswordField('Password', [Required()])
     password_confirmation = PasswordField(

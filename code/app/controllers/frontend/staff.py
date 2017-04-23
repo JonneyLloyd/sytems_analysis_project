@@ -14,27 +14,21 @@ from app.forms.accounts import LoginForm, RegisterForm, ProfileForm, RegisterFor
 import datetime
 
 @app.route('/staff/add_staff', methods=['GET', 'POST'])
-@login_required
-def add_staff():
-
-    if request.method == 'POST':
-        email = request.form['email']
-        role = request.form['role']
-        password = request.form['password']
-    
-    UserManager.create_staff(email,password,role)
-    return render_template('staff/staff_updated.html',page=1)
-
 
 @app.route('/staff/add_staff_form', methods=['GET', 'POST'])
 @login_required
+@user_is('ADMIN')
 def add_staff_form():
     form = RegisterFormStaff()
+    if form.validate_on_submit():
+        UserManager.create_staff(form.email.data, form.password.data, form.role.data)
+        flash(form.email.data + ' Has been added to users with role: ' + form.role.data)
 
     return render_template('staff/add_staff.html', form=form)
 
 @app.route('/staff/remove_staff', methods=['GET', 'POST'])
 @login_required
+@user_is('ADMIN')
 def remove_staff():
 
     if request.method == 'POST':
@@ -50,6 +44,7 @@ def remove_staff():
 
 @app.route('/staff/remove_staff_form', methods=['GET', 'POST'])
 @login_required
+@user_is('ADMIN')
 def remove_staff_form():
     this_user = g.user.id
     staff_list = User.query.filter(User._role_id !=1, User.id != this_user).all()

@@ -10,11 +10,8 @@ from app.controllers.frontend import error
 from app.controllers.frontend import test
 from app.controllers.frontend import booking
 from app.controllers.frontend import rooms
-# from app.controllers.frontend import checkin_and_out
+from app.controllers.frontend import checkin_and_out
 from app.controllers.frontend import staff
-
-
-
 
 @app.route('/')
 def home():

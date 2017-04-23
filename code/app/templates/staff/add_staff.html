@@ -9,7 +9,7 @@
   <div class="container">
     {% from "macros/flash.html" import render_flashed_messages %}
     {{ render_flashed_messages() }}
-    <form class="" action="/staff/add_staff" method="POST">
+    <form class="" action="/staff/add_staff_form" method="POST">
         {{ form.csrf_token }}
         {{ wtf.form_field(form.email) }}
         {{ wtf.form_field(form.role) }}

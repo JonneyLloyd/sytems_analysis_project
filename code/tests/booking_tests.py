@@ -1,6 +1,7 @@
 from app.app_factory import AppFactory
 from app.extensions import db
 from config import TestConfig
+from test import BaseDatabaseTest
 
 from datetime import datetime
 
@@ -27,46 +28,26 @@ class AnObserver(Observer):
         self.kwargs = kwargs
         return
 
-class TestBookingView:
+class TestBookingView(BaseDatabaseTest):
     @classmethod
     def setup_class(cls):
-        cls.app = AppFactory.create_app(TestConfig)
-        # db.init_app(cls.app)
+        super(TestBookingView, cls).setup_class()
 
         with cls.app.app_context():
-            db.create_all()
-            roomPrice = RoomPrice("single", 100, 150)
-            room = Room(1, 101, 3, "Available", 1)
-            booking = Booking(1, 1, datetime.strptime('2017-01-02', '%Y-%m-%d').date()
-            ,datetime.strptime('2017-01-10', '%Y-%m-%d').date(), 123123123, 2000)
-            RoomManager.set_availability_for_booking(datetime.strptime("2017-01-01", '%Y-%m-%d').date(), 1)
-
-            UserManager.create_user("asd@asd.asd", "asdasd")
-            user = UserManager.get_user("asd@asd.asd")
-            UserManager.update_details(user, "mr", "test", '05644654')
-
-            db.session.add(roomPrice)
-            db.session.add(room)
-            db.session.add(booking)
-            db.session.commit()
-
             cls.observable = Observable()
-
             cls.observer1 = AnObserver()
         print ("Starting booking view tests")
 
     @classmethod
     def teardown_class(cls):
         print ("Ending booking view tests")
-        with cls.app.app_context():
-            db.drop_all()
+        super(TestBookingView, cls).teardown_class()
 
     def setup(self):
         print ("Runs before each test method")
 
     def teardown(self):
         print ("Runs after each test method")
-
 
     def test_room_manager(self):
         with self.app.app_context():
