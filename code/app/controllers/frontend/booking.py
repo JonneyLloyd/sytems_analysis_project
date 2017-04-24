@@ -24,21 +24,6 @@ def booking():
 
     return render_template('booking/bookingForm.html', form=form)
 
-@app.route('/booking/bookingForm')
-@login_required
-def booking_view():
-    return render_template('booking/bookingForm.html')
-
-
-@app.route('/booking/booking', methods=['POST', 'GET'])
-@login_required
-def result():
-    if request.method == 'POST':
-        id = request.form['user_id']
-        result = BookingView.get_booking_for_user(id)
-        if result != False:
-            return render_template("booking/bookingView.html", result=result)
-
 
 @app.route('/accounts/make-book-form', methods=['GET', 'POST'])
 @login_required
@@ -114,4 +99,3 @@ def change_price():
         RoomManager.pricechange(room_id,weekday_price,weekend_price)
 
     return render_template('booking/priceChanged.html')
-
