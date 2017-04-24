@@ -31,7 +31,9 @@ class makeBooking(object):
         room_type_number = int(room_type)
 
         for date_booked in date_list:
-            RoomManager.set_availability_for_booking(date_booked, room_type_number)
+            result = RoomManager.set_availability_for_booking(date_booked, room_type_number)
+            if result == False:
+                return False
 
         # Get total price of room
         room_wanted = (RoomPrice.query.filter_by(_id=room_type).first())
@@ -39,7 +41,7 @@ class makeBooking(object):
         room_found = False
 
         for room_available in room_number_object:
-            room_number = room_available._number
+            room_number = room_available.id
 
             room_bookings = (Booking.query.filter_by(_room_id=room_number).all())
 
@@ -60,7 +62,7 @@ class makeBooking(object):
                         break
 
             else:
-                room_to_book = (Room.query.filter_by(_number=room_number).first())
+                room_to_book = (Room.query.filter_by(id=room_number).first())
 
         try:
             room_number = room_to_book.id
@@ -97,7 +99,7 @@ class makeBooking(object):
             db.session.add(room_booking)
             db.session.commit()
             return True
-        except NameError:
+        except (NameError,AttributeError):
 
             return False
 
