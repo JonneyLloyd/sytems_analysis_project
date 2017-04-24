@@ -17,7 +17,7 @@ class makeBooking(object):
         date_start = datetime.datetime.strptime(new_start, '%Y%m%d').date()
         date_end = datetime.datetime.strptime(new_end, '%Y%m%d').date()
 
-        if date_start < datetime.datetime.now().date() or end_date < datetime.datetime.now().date():
+        if date_start < datetime.datetime.now().date() or date_end < datetime.datetime.now().date():
             return False
 
         distance = date_end - date_start
@@ -63,7 +63,7 @@ class makeBooking(object):
                 room_to_book = (Room.query.filter_by(_number=room_number).first())
 
         try:
-            room_number = room_to_book._number
+            room_number = room_to_book.id
             weekday_price = room_wanted._price_weekday
             weekend_price = room_wanted._price_weekend
             for i in range(0, distance):
@@ -120,7 +120,7 @@ class cancelBooking(object):
                                                    _start_date=booked_start_date).first()
 
         if (booking_instance):
-            room_type_obj = Room.query.filter_by(_number=booked_room_number).first()
+            room_type_obj = Room.query.filter_by(_id=booked_room_number).first()
 
             room_type = room_type_obj.type
 
