@@ -1,14 +1,14 @@
 from app.models.room import Room
 from app.models.room import RoomPrice
 from app.models.room import RoomStatus
-from app.api.utils import Observable
-from app.api.utils import ObserverTest
+# from app.api.utils import Observable
+# from app.api.utils import ObserverTest
 from datetime import datetime
 from app.extensions import db
 
-observable = Observable()
-observer_test = ObserverTest()
-observable.register(observer_test)
+# observable = Observable()
+# observer_test = ObserverTest()
+# observable.register(observer_test)
 
 class RoomManager(object):
 

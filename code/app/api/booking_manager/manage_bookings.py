@@ -17,6 +17,9 @@ class makeBooking(object):
         date_start = datetime.datetime.strptime(new_start, '%Y%m%d').date()
         date_end = datetime.datetime.strptime(new_end, '%Y%m%d').date()
 
+        if date_start < datetime.datetime.now().date() or end_date < datetime.datetime.now().date():
+            return False
+
         distance = date_end - date_start
         distance = distance.days
 

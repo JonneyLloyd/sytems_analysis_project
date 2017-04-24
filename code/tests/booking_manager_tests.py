@@ -1,4 +1,3 @@
-from app.app_factory import AppFactory
 from app.extensions import db
 from config import TestConfig
 from test import BaseDatabaseTest
@@ -13,15 +12,14 @@ from app.models.room import Room
 from app.models.booking import Booking
 from app.api.booking_manager import cancelBooking, makeBooking
 import datetime
-from app.api.utils import Observable
-from app.api.utils import Observer
-from app.api.utils import ObserverTest
+
 
 
 class TestBookingManger(BaseDatabaseTest):
     @classmethod
     def setup_class(cls):
         super(TestBookingManger, cls).setup_class()
+
 
     @classmethod
     def teardown_class(cls):
@@ -48,8 +46,7 @@ class TestBookingManger(BaseDatabaseTest):
 
     def bookingcancel_test(self):
         with self.app.app_context():
-           cancelBooking.bookingcancel(1, 123123123, 101, '20170102')
-
+            cancelBooking.bookingcancel(1, 123123123, 101, '20170102')
 
 
 
