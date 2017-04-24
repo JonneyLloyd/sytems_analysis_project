@@ -23,7 +23,7 @@ def add_staff():
         role = int(form.role.data)
         role = list(RoleEnum)[role]
         UserManager.create_user(form.email.data, form.password.data,role)
-        flash(form.email.data + ' Has been added to users with role: ' + form.role.data)
+        flash(form.email.data + ' Has been added to users with role: ' + str(role))
 
     return render_template('staff/add_staff.html', form=form)
 
