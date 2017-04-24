@@ -23,19 +23,11 @@ class TestBookingManger(BaseDatabaseTest):
     def setup_class(cls):
         super(TestBookingManger, cls).setup_class()
 
-        print ("Starting booking manager tests")
-
     @classmethod
     def teardown_class(cls):
-        print ("Ending booking view tests")
         with cls.app.app_context():
             db.drop_all()
 
-    def setup(self):
-        print ("Runs before each test method")
-
-    def teardown(self):
-        print ("Runs after each test method")
 
     def bookingmake_test(self):
         with self.app.app_context():
@@ -56,7 +48,9 @@ class TestBookingManger(BaseDatabaseTest):
 
     def bookingcancel_test(self):
         with self.app.app_context():
-            cancelBooking.bookingcancel(1, 123123123, 101, '20170102')
+           cancelBooking.bookingcancel(1, 123123123, 101, '20170102')
+
+
 
 
 

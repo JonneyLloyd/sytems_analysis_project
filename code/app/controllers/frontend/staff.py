@@ -14,10 +14,10 @@ from app.forms.accounts import LoginForm, RegisterForm, ProfileForm, RegisterFor
 from app.models.role import RoleEnum, RoleFactory
 import datetime
 
-@app.route('/staff/add_staff_form', methods=['GET', 'POST'])
+@app.route('/staff/add_staff', methods=['GET', 'POST'])
 @login_required
 @user_is('ADMIN')
-def add_staff_form():
+def add_staff():
     form = RegisterFormStaff()
     if form.validate_on_submit():
         role = int(form.role.data)
@@ -28,10 +28,10 @@ def add_staff_form():
     return render_template('staff/add_staff.html', form=form)
 
 
-@app.route('/staff/remove_staff_form', methods=['GET', 'POST'])
+@app.route('/staff/remove_staff', methods=['GET', 'POST'])
 @login_required
 @user_is('ADMIN')
-def remove_staff_form():
+def remove_staff():
 
     form = DeleteFormStaff()
     if form.validate_on_submit():
