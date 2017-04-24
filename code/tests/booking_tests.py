@@ -37,11 +37,9 @@ class TestBookingView(BaseDatabaseTest):
             cls.observable = Observable()
             cls.observer1 = AnObserver()
 
-
     @classmethod
     def teardown_class(cls):
         super(TestBookingView, cls).teardown_class()
-
 
     def test_room_manager(self):
         with self.app.app_context():
@@ -61,6 +59,11 @@ class TestBookingView(BaseDatabaseTest):
             result = BookingView.get_booking_by_credit_card(123123123)
             assert result[0]['first_name'] == "mr"
             assert result[0]['last_name'] == "test"
+
+    def test_get_sales_between_dates(self):
+        with self.app.app_context():
+            result = BookingView.get_sales_between_dates("2017-01-01", "2017-01-02")
+            assert result[1]['total'] == 2000.0
 
     def test_room_booked(self):
         with self.app.app_context():
