@@ -37,11 +37,9 @@ class TestBookingView(BaseDatabaseTest):
             cls.observable = Observable()
             cls.observer1 = AnObserver()
 
-
     @classmethod
     def teardown_class(cls):
         super(TestBookingView, cls).teardown_class()
-
 
     def test_room_manager(self):
         with self.app.app_context():
