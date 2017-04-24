@@ -39,7 +39,7 @@ class makeBooking(object):
         room_found = False
 
         for room_available in room_number_object:
-            room_number = room_available._number
+            room_number = room_available.id
 
             room_bookings = (Booking.query.filter_by(_room_id=room_number).all())
 
