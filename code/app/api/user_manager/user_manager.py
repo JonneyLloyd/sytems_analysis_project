@@ -55,4 +55,3 @@ class UserManager(object):
 
         db.session.commit()
         return True
-
