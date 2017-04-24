@@ -53,8 +53,14 @@ class TestBookingView(BaseDatabaseTest):
     def test_get_booking_for_user(self):
         with self.app.app_context():
             result = BookingView.get_booking_for_user(1)
-            assert result['first_name'] == "mr"
-            assert result['last_name'] == "test"
+            assert result[0]['first_name'] == "mr"
+            assert result[0]['last_name'] == "test"
+
+    def test_get_booking_for_credit_card(self):
+        with self.app.app_context():
+            result = BookingView.get_booking_by_credit_card(123123123)
+            assert result[0]['first_name'] == "mr"
+            assert result[0]['last_name'] == "test"
 
     def test_room_booked(self):
         with self.app.app_context():
