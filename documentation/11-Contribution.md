@@ -10,7 +10,7 @@ done\
 ~~~
 
 ~~~BASH
-for file in $(git ls-files | grep code | grep -Ev "__init__.py|*.md"); do
+for file in $(git ls-files | grep code | grep -Ev "__init__.py|*.md|*.html|*.css"); do
     echo '\n';
     echo $file;
     echo '==============================================';
@@ -35,14 +35,14 @@ done
 ### Lines of Code per Team Member:
 ~~~
  128 author EasternBob
- 820 author JonneyLloyd
-1259 author OliverGavin
- 331 author Patrick Cumiskey
+ 823 author JonneyLloyd
+1257 author OliverGavin
+ 572 author Patrick Cumiskey
 ----
-2538 Total
+2780 Total
 ~~~
 
-### Packages, Classes & Functions, Authors, Lines of Code:
+### Packages, Classes & Functions, Authors, Lines of Code (excluding html):
 ~~~
 code/app/api/booking_manager/manage_bookings.py
 ==============================================
@@ -50,7 +50,7 @@ code/app/api/booking_manager/manage_bookings.py
      makeBooking(object):
      cancelBooking(object):
  Contribution in lines:
-    116 author Patrick Cumiskey
+    140 author Patrick Cumiskey
 
 
 code/app/api/booking_view/booking_view.py
@@ -62,14 +62,6 @@ code/app/api/booking_view/booking_view.py
      83 author JonneyLloyd
       1 author OliverGavin
       2 author Patrick Cumiskey
-
-
-code/app/api/change_room_price/changePrice.py
-==============================================
- Classes:
-     changePrice(object):
- Contribution in lines:
-     22 author Patrick Cumiskey
 
 
 code/app/api/checkin_manager/checkin_manager.py
@@ -86,7 +78,7 @@ code/app/api/room_manager/room_manager.py
      RoomManager(object):
  Contribution in lines:
     144 author JonneyLloyd
-      2 author Patrick Cumiskey
+     13 author Patrick Cumiskey
 
 
 code/app/api/user_manager/user_manager.py
@@ -95,6 +87,7 @@ code/app/api/user_manager/user_manager.py
      UserManager(object):
  Contribution in lines:
      48 author OliverGavin
+     10 author Patrick Cumiskey
 
 
 code/app/api/utils/observable.py
@@ -204,8 +197,8 @@ code/app/controllers/frontend/booking.py
      change_price_form():
      change_price():
  Contribution in lines:
-     17 author JonneyLloyd
-     78 author Patrick Cumiskey
+     15 author JonneyLloyd
+    102 author Patrick Cumiskey
 
 
 code/app/controllers/frontend/checkin_and_out.py
@@ -235,7 +228,7 @@ code/app/controllers/frontend/navigation.py
      navbar():
  Contribution in lines:
      23 author OliverGavin
-      6 author Patrick Cumiskey
+     11 author Patrick Cumiskey
 
 
 code/app/controllers/frontend/rooms.py
@@ -245,6 +238,15 @@ code/app/controllers/frontend/rooms.py
      room_clean():
  Contribution in lines:
      30 author JonneyLloyd
+
+
+code/app/controllers/frontend/staff.py
+==============================================
+ Functions:
+     add_staff_form():
+     remove_staff_form():
+ Contribution in lines:
+     40 author Patrick Cumiskey
 
 
 code/app/controllers/frontend/test.py
@@ -288,8 +290,11 @@ code/app/forms/accounts.py
      ProfileForm(Form):
      RegisterForm(Form):
      LoginForm(Form):
+     RegisterFormStaff(Form):
+     DeleteFormStaff(Form):
  Contribution in lines:
-     25 author OliverGavin
+     24 author OliverGavin
+     16 author Patrick Cumiskey
 
 
 code/app/forms/booking.py
@@ -409,169 +414,6 @@ code/app/models/user/user_details.py
      22 author OliverGavin
 
 
-code/app/static/app/css/style.css
-==============================================
- Contribution in lines:
-
-
-code/app/templates/accounts/edit-profile.html
-==============================================
- Contribution in lines:
-     22 author OliverGavin
-
-
-code/app/templates/accounts/login.html
-==============================================
- Contribution in lines:
-     19 author OliverGavin
-
-
-code/app/templates/accounts/profile.html
-==============================================
- Contribution in lines:
-     21 author OliverGavin
-
-
-code/app/templates/accounts/register.html
-==============================================
- Contribution in lines:
-     20 author OliverGavin
-
-
-code/app/templates/booking/bookingFailed.html
-==============================================
- Contribution in lines:
-     13 author Patrick Cumiskey
-
-
-code/app/templates/booking/bookingForm.html
-==============================================
- Contribution in lines:
-     17 author JonneyLloyd
-
-
-code/app/templates/booking/bookingSuccess.html
-==============================================
- Contribution in lines:
-     13 author Patrick Cumiskey
-
-
-code/app/templates/booking/bookingView.html
-==============================================
- Contribution in lines:
-     12 author JonneyLloyd
-
-
-code/app/templates/booking/cancelBooking.html
-==============================================
- Contribution in lines:
-     13 author Patrick Cumiskey
-
-
-code/app/templates/booking/changeprice.html
-==============================================
- Contribution in lines:
-     13 author Patrick Cumiskey
-
-
-code/app/templates/booking/makebooking.html
-==============================================
- Contribution in lines:
-     14 author Patrick Cumiskey
-
-
-code/app/templates/booking/priceChanged.html
-==============================================
- Contribution in lines:
-     13 author Patrick Cumiskey
-
-
-code/app/templates/booking/roomCancelFail.html
-==============================================
- Contribution in lines:
-     13 author Patrick Cumiskey
-
-
-code/app/templates/booking/roomCanceled.html
-==============================================
- Contribution in lines:
-     13 author Patrick Cumiskey
-
-
-code/app/templates/checkin_and_out/AcceptCheckIn.html
-==============================================
- Contribution in lines:
-     35 author EasternBob
-      2 author OliverGavin
-
-
-code/app/templates/checkin_and_out/AcceptCheckOut.html
-==============================================
- Contribution in lines:
-     10 author EasternBob
-
-
-code/app/templates/checkin_and_out/CheckIn.html
-==============================================
- Contribution in lines:
-     16 author EasternBob
-      2 author OliverGavin
-
-
-code/app/templates/checkin_and_out/CheckOut.html
-==============================================
- Contribution in lines:
-     16 author EasternBob
-
-
-code/app/templates/layout.html
-==============================================
- Contribution in lines:
-     36 author OliverGavin
-
-
-code/app/templates/layout/footer.html
-==============================================
- Contribution in lines:
-      3 author OliverGavin
-
-
-code/app/templates/layout/header.html
-==============================================
- Contribution in lines:
-      1 author OliverGavin
-
-
-code/app/templates/layout/nav.html
-==============================================
- Contribution in lines:
-      1 author OliverGavin
-
-
-code/app/templates/macros/flash.html
-==============================================
- Contribution in lines:
-     14 author OliverGavin
-
-
-code/app/templates/rooms/room-clean.html
-==============================================
- Contribution in lines:
-     32 author JonneyLloyd
-
-
-code/app/templates/rooms/rooms.html
-==============================================
- Contribution in lines:
-     19 author JonneyLloyd
-
-
-code/app/templates/rooms/roomview.html
-==============================================
- Contribution in lines:
-     12 author JonneyLloyd
-
-
 code/config.py
 ==============================================
  Classes:
@@ -594,13 +436,22 @@ code/server.py
       6 author OliverGavin
 
 
+code/tests/booking_manager_tests.py
+==============================================
+ Classes:
+     TestBookingManger(BaseDatabaseTest):
+ Contribution in lines:
+     66 author Patrick Cumiskey
+
+
 code/tests/booking_tests.py
 ==============================================
  Classes:
      AnObserver(Observer):
-     TestBookingView:
+     TestBookingView(BaseDatabaseTest):
  Contribution in lines:
-    144 author JonneyLloyd
+    121 author JonneyLloyd
+      4 author JonneyLLoyd
 
 
 code/tests/test.py
@@ -609,5 +460,6 @@ code/tests/test.py
      BaseDatabaseTest(object):
      TestCase(BaseDatabaseTest):
  Contribution in lines:
-     46 author OliverGavin
+     24 author JonneyLLoyd
+     45 author OliverGavin
 ~~~
