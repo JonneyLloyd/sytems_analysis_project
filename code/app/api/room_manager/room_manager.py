@@ -115,7 +115,6 @@ class RoomManager(object):
     '''
     Func will reduce roomstatus qty by one
     If no entry will generate a new one
-    Hardcoded to max 20 rooms for now
     '''
     @staticmethod
     def set_availability_for_booking(date, room_type):
