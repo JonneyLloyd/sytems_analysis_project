@@ -13,6 +13,11 @@ def navbar():
         View('Profile', 'profile'),
         View('Check in', 'checkin'),
         Subgroup(
+            'Staff',
+            View('Add Staff', 'add_staff_form'),
+            View('Remove Staff', 'remove_staff_form'),
+        ),
+        Subgroup(
             'Booking',
             View('Booking', 'make_book_form'),
             View('Cancel', 'cancel_booking_form'),

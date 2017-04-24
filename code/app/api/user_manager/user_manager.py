@@ -46,3 +46,13 @@ class UserManager(object):
         user.details.contact_number = contact_number
         db.session.add(user)
         db.session.commit()
+
+
+    def remove_staff(email):
+        if not User.query.filter_by(email=email).first():
+            return False
+        User.query.filter_by(email=email).delete()
+
+        db.session.commit()
+        return True
+

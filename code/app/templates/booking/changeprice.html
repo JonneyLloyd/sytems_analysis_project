@@ -2,12 +2,18 @@
 {% block content %}
 
     <form action="/accounts/changeprice" method="POST">
-      <input type="text" name="room_id" placeholder="room_id">
-      <input type="text" name="weekday_price" placeholder="weekday_price">
-      <input type="text" name="weekend_price" placeholder="weekend_price">
+
+        <label>Select Room Type :</label>
+        <select name="room_id" width="300px">
+            {% for x in room_list %}
+                <option value="{{ x.id  }}" SELECTED>{{ x.type }}</option>
+            {% endfor %}
+        </select>
+        <input type="text" name="weekday_price" placeholder="weekday_price">
+        <input type="text" name="weekend_price" placeholder="weekend_price">
 
 
-      <input type="submit" value="ChangePrice">
+        <input type="submit" value="ChangePrice">
     </form>
 
 {% endblock %}
