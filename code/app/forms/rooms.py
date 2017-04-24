@@ -16,7 +16,7 @@ class RoomAvailabilityForm(Form):
         date = self.date.data
         room_type = self.room_type.data
         if not RoomManager.get_rooms_occupied_on_date(date, room_type):
-            flash('Error', 'danger')  # TODO: enum
+            flash('Error', 'danger')
             return False
         else:
             return True
@@ -37,7 +37,7 @@ class SetRoomCleanForm(Form):
         clean = self.clean.data
         available = self.available.data
         if not RoomManager.set_room_clean(number, clean) or not RoomManager.set_room_availablity(number, available):
-            flash('Error', 'danger')  # TODO: enum
+            flash('Error', 'danger')
             return False
         else:
             return True

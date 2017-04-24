@@ -54,17 +54,11 @@ def edit_profile():
 
         AccessManager.check_user_has_permission_on(user, P.VIEW_OTHER_USER, P.VIEW_USER)
 
-        data = {
-            'user_id': user.id
-        }
-        if user.details is not None:
-            data.update({  # TODO: marshal instead?
-                'first_name': user.details.first_name,
-                'last_name': user.details.last_name,
-                'contact_number': user.details.contact_number
-            })
-
-        form = ProfileForm(data=data)
+        form.user_id.data = user.id
+        if not form.is_submitted() and user.details is not None:
+            form.first_name.data = user.details.first_name
+            form.last_name.data = user.details.last_name
+            form.contact_number.data = user.details.contact_number
 
     return render_template('accounts/edit-profile.html', form=form)
 
@@ -76,7 +70,7 @@ def register():
     if form.validate_on_submit():
 
         if not UserManager.create_user(form.email.data, form.password.data):
-            flash('This email is already in use.', 'danger')  # TODO: enum
+            flash('This email is already in use.', 'danger')
         else:
             LoginManager.login(form.email.data, form.password.data)
             return redirect(url_for('edit_profile'))
@@ -91,7 +85,7 @@ def login():
     if form.validate_on_submit():
 
         if not LoginManager.login(form.email.data, form.password.data):
-            flash('Incorrect email or password. Please try again.', 'danger')  # TODO: enum
+            flash('Incorrect email or password. Please try again.', 'danger')
         else:
             return redirect(url_for('home'))
 
