@@ -36,18 +36,12 @@ class TestBookingView(BaseDatabaseTest):
         with cls.app.app_context():
             cls.observable = Observable()
             cls.observer1 = AnObserver()
-        print ("Starting booking view tests")
+
 
     @classmethod
     def teardown_class(cls):
-        print ("Ending booking view tests")
         super(TestBookingView, cls).teardown_class()
 
-    def setup(self):
-        print ("Runs before each test method")
-
-    def teardown(self):
-        print ("Runs after each test method")
 
     def test_room_manager(self):
         with self.app.app_context():

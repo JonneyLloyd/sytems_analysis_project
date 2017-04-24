@@ -1,4 +1,3 @@
-from app.app_factory import AppFactory
 from app.extensions import db
 from config import TestConfig
 from test import BaseDatabaseTest
@@ -13,9 +12,7 @@ from app.models.room import Room
 from app.models.booking import Booking
 from app.api.booking_manager import cancelBooking, makeBooking
 import datetime
-from app.api.utils import Observable
-from app.api.utils import Observer
-from app.api.utils import ObserverTest
+
 
 
 class TestBookingManger(BaseDatabaseTest):
@@ -23,19 +20,12 @@ class TestBookingManger(BaseDatabaseTest):
     def setup_class(cls):
         super(TestBookingManger, cls).setup_class()
 
-        print ("Starting booking manager tests")
 
     @classmethod
     def teardown_class(cls):
-        print ("Ending booking view tests")
         with cls.app.app_context():
             db.drop_all()
 
-    def setup(self):
-        print ("Runs before each test method")
-
-    def teardown(self):
-        print ("Runs after each test method")
 
     def bookingmake_test(self):
         with self.app.app_context():
@@ -57,6 +47,7 @@ class TestBookingManger(BaseDatabaseTest):
     def bookingcancel_test(self):
         with self.app.app_context():
             cancelBooking.bookingcancel(1, 123123123, 101, '20170102')
+
 
 
 
