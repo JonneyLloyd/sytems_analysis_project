@@ -6,7 +6,6 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from app.models.permission import Permission, PermissionEnum
 
 
-# factor out (business logic)?
 class RoleEnum(Enum):
     ADMIN = 'ADMIN'
     MANAGER = 'MANAGER'

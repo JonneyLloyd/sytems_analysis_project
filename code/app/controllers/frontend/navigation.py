@@ -19,8 +19,9 @@ def navbar():
             View('Remove Staff', 'remove_staff'),
         ),
         Subgroup(
-            'Booking',
-            View('Booking', 'make_book_form'),
+            'Bookings',
+            View('View Bookings', 'booking'),
+            View('Make a Booking', 'make_book_form'),
             View('Cancel', 'cancel_booking_form'),
             View('Price', 'change_price_form'),
         ),
