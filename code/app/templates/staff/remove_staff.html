@@ -9,7 +9,7 @@
   <div class="container">
     {% from "macros/flash.html" import render_flashed_messages %}
     {{ render_flashed_messages() }}
-    <form class="" action="/staff/remove_staff_form" method="POST">
+    <form class="" action="/staff/remove_staff" method="POST">
         {{ form.csrf_token }}
         {{ wtf.form_field(form.email) }}
       <input class="btn btn-primary" type="submit" value="Delete">

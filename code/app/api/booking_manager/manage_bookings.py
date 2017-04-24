@@ -17,6 +17,9 @@ class makeBooking(object):
         date_start = datetime.datetime.strptime(new_start, '%Y%m%d').date()
         date_end = datetime.datetime.strptime(new_end, '%Y%m%d').date()
 
+        if date_start < datetime.datetime.now().date() or end_date < datetime.datetime.now().date():
+            return False
+
         distance = date_end - date_start
         distance = distance.days
 
@@ -111,6 +114,7 @@ class makeBooking(object):
 class cancelBooking(object):
     @staticmethod
     def bookingcancel(user_id, credit_card, booked_room_number, booked_start_date):
+        booked_start_date = booked_start_date.replace('-', "")
         booked_start_date = datetime.datetime.strptime(booked_start_date, '%Y%m%d').date()
         booking_instance = Booking.query.filter_by(user_id = user_id,credit_card=credit_card, _room_id=booked_room_number,
                                                    _start_date=booked_start_date).first()
