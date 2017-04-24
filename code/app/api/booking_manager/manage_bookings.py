@@ -1,4 +1,3 @@
-
 from app.models.room import Room
 from app.models.room import RoomPrice
 from app.extensions import db
@@ -7,7 +6,6 @@ from app.api.room_manager import RoomManager
 from app.models.room import RoomStatus
 from datetime import datetime, date, timedelta
 import datetime
-
 
 
 class makeBooking(object):
@@ -30,38 +28,36 @@ class makeBooking(object):
         room_type_number = int(room_type)
 
         for date_booked in date_list:
-            RoomManager.set_availability_for_booking(date_booked,room_type_number )
-
+            RoomManager.set_availability_for_booking(date_booked, room_type_number)
 
         # Get total price of room
-
-        room_wanted = (RoomPrice.query.filter_by(_type=room_type).first())
+        room_wanted = (RoomPrice.query.filter_by(_id=room_type).first())
         room_number_object = (Room.query.filter_by(_type=room_type).all())
         room_found = False
-        # room_bookings = (Booking.query.filter_by(_room_id=room_number_object._number).all())
 
         for room_available in room_number_object:
             room_number = room_available._number
 
             room_bookings = (Booking.query.filter_by(_room_id=room_number).all())
 
-            if (room_found != True):
-                if (room_bookings != []):
-                    for room_date in room_bookings:
+            if (room_bookings != [] and not room_found):
 
-                        room_date_start = room_date._start_date
-                        room_date_end = room_date._end_date
-                        if (date_start <= room_date_start and date_end >= room_date_end or date_start >= room_date_start
-                                and date_end <= room_date_end and room_number == room_date._room_id):
+                for room_date in room_bookings:
 
-                            break
-                        else:
+                    room_date_start = room_date._start_date
+                    room_date_end = room_date._end_date
+                    if (date_start <= room_date_start and date_end >= room_date_end or date_start >= room_date_start
+                    and date_end <= room_date_end and room_number == room_date._room_id):
 
-                            room_to_book = room_available
-                            room_found = True
-                            break
-                else:
-                    room_to_book = (Room.query.filter_by(_number=room_number).first())
+                        break
+                    else:
+
+                        room_to_book = room_available
+                        room_found = True
+                        break
+
+            else:
+                room_to_book = (Room.query.filter_by(_number=room_number).first())
 
         try:
             room_number = room_to_book._number
@@ -73,13 +69,28 @@ class makeBooking(object):
                 start_day = day_booked.weekday()
 
                 # is it a weekday?
-                if (start_day < 5):
-                    total_price += weekday_price
-                # if not, is weekend
-                else:
-                    total_price += weekend_price
+                date = date_list[i]
 
-            room_booking = Booking(user_id, room_number, start_date, end_date, credit_card, total_price)
+                booking = RoomStatus.query.filter(RoomStatus.date == date,
+                                                  RoomStatus.type == room_type).first()
+
+                if (start_day < 5 and booking.qty >= 19):
+                    total_price += weekday_price
+                elif (start_day < 5 and booking.qty < 19):
+                    total_price += weekday_price * 2
+                # if not, is weekend
+                elif (start_day > 5 and booking.qty >= 19):
+                    total_price += weekend_price
+                else:
+                    total_price += weekend_price * 2
+
+
+
+            start_dated = datetime.datetime.strptime(new_start, '%Y%m%d').date()
+            end_dated = datetime.datetime.strptime(new_end, '%Y%m%d').date()
+
+            room_booking = Booking(user_id, room_number, start_dated, end_dated, credit_card, total_price)
+
             db.session.add(room_booking)
             db.session.commit()
             return True
@@ -87,11 +98,21 @@ class makeBooking(object):
 
             return False
 
+    def get_existing_rooms():
+
+        room_list2 = []
+
+        for value in db.session.query(Room.type).distinct():
+            name = RoomPrice.query.filter_by(id=value[0]).first()
+            room_list2.append(name)
+
+        return room_list2
 
 class cancelBooking(object):
     @staticmethod
-    def bookingcancel(credit_card, booked_room_number, booked_start_date):
-        booking_instance = Booking.query.filter_by(credit_card=credit_card, _room_id=booked_room_number,
+    def bookingcancel(user_id, credit_card, booked_room_number, booked_start_date):
+        booked_start_date = datetime.datetime.strptime(booked_start_date, '%Y%m%d').date()
+        booking_instance = Booking.query.filter_by(user_id = user_id,credit_card=credit_card, _room_id=booked_room_number,
                                                    _start_date=booked_start_date).first()
 
         if (booking_instance):
@@ -111,6 +132,9 @@ class cancelBooking(object):
             for date_booked in date_list:
                 RoomManager.increase_availability_for_booking(date_booked, room_type)
 
+            Booking.query.filter_by(user_id=user_id, credit_card=credit_card, _room_id=booked_room_number,
+                                    _start_date=booked_start_date).delete()
+            db.session.commit()
             return True
         else:
             return False
