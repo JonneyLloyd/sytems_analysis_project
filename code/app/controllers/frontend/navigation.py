@@ -12,6 +12,7 @@ def navbar():
         View('Log out', 'logout'),
         View('Profile', 'profile'),
         View('Check in', 'checkin'),
+        View('Check out', 'checkout'),
         Subgroup(
             'Staff',
             View('Add Staff', 'add_staff'),
