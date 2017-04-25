@@ -119,10 +119,8 @@ class TestBookingView(BaseDatabaseTest):
 
     def test_room_observer(self):
         with self.app.app_context():
-            i = 16
-            while i > 0:
-                RoomManager.set_availability_for_booking(datetime.strptime("2017-01-01", '%Y-%m-%d').date(), 1)
-                i-=1
-                '''
-                use nosetests -vs ./tests to view observer messages
-                '''
+            RoomManager.set_availability_for_booking(datetime.strptime("2017-01-01", '%Y-%m-%d').date(), 1)
+            RoomManager.set_availability_for_booking(datetime.strptime("2017-01-01", '%Y-%m-%d').date(), 1)
+            '''
+            use nosetests -vs ./tests to view observer messages
+            '''

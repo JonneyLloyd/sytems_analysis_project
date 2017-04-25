@@ -12,7 +12,7 @@ class BookingView(object):
             return False
         for booking in bookings:
             info = {
-                'room_id': booking.room_id,
+                'number': booking.room.number,
                 'start_date': booking.start_date,
                 'end_date': booking.end_date,
                 'booking_price': booking.booking_price,

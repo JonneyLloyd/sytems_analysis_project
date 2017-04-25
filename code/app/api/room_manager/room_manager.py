@@ -122,11 +122,11 @@ class RoomManager(object):
         booking = RoomStatus.query.filter(RoomStatus.date == date,
                                         RoomStatus.type == room_type).first()
         if not booking:
-            booking = RoomStatus(date, room_type, 20)
+            booking = RoomStatus(date, room_type, 5)
             db.session.add(booking)
         if booking.qty > 0:
             booking.qty -=1
-        if booking.qty <+ 5:
+        if booking.qty < 3:
             observable.update_observers('Room availability low',
             Alert="Room Type: %s Number left: %s Date: %s" %(booking.room_price.type,booking.qty,booking.date))
         else:
@@ -154,4 +154,3 @@ class RoomManager(object):
 
         db.session.add(room_update)
         db.session.commit()
-
