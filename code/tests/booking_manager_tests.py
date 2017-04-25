@@ -26,19 +26,6 @@ class TestBookingManger(BaseDatabaseTest):
         with cls.app.app_context():
             db.drop_all()
 
-
-    def bookingmake_test(self):
-        with self.app.app_context():
-            result = makeBooking.bookingmake(1, 1, '2017-07-24', '2017-07-25', 1234)
-            assert result != False
-            result = Booking.query.filter_by(user_id=1, credit_card=1234, _room_id=1,
-                                    _start_date='2017-07-24')
-            if result:
-                assert result !=False
-            else:
-                assert result == False
-
-
     def pricechange_test(self):
         with self.app.app_context():
             result = RoomManager.pricechange(1,1235,4565)
@@ -47,11 +34,3 @@ class TestBookingManger(BaseDatabaseTest):
     def bookingcancel_test(self):
         with self.app.app_context():
             cancelBooking.bookingcancel(1, 123123123, 101, '20170102')
-
-
-
-
-
-
-
-
